@@ -1,9 +1,9 @@
 Funbox::Application.routes.draw do
+  root to: 'top#index'
+
   resources :playlists do
     resources :track, only: [:index, :create, :destroy]
   end
-
-  root to: 'top#index'
 
   # For OmniAuth
   get "/auth/:provider/callback" => "sessions#callback"
