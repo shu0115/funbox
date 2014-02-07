@@ -1,0 +1,6 @@
+- if tracks.present?
+  - tracks.each do |track|
+    %iframe{ width: "280", height: "157", src: "http://www.youtube.com/embed/#{track.unique_id}", frameborder: "0", allowfullscreen: true}
+    = link_to "Delete", playlist_track_path(playlist_id: track.playlist_id, id: track.id), data: { confirm: "「#{track.title}」を削除します。よろしいですか？", method: 'delete', remote: true, update_target: "track_list" }
+%br
+%br

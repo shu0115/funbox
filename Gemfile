@@ -58,6 +58,9 @@ gem "exception_notification"
 gem "haml-rails"
 gem "redcarpet"
 gem "coderay"
+gem 'youtube_it'
+gem 'ruby-duration'
+
 group :development do
   gem "pry-rails"
   gem "better_errors"

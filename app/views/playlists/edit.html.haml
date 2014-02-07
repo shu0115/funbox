@@ -1,0 +1,9 @@
+%h1 Editing playlist
+
+= form_for @playlist do |f|
+  = render partial: '/playlists/form', locals: { f: f }
+  / = render 'form'
+
+= link_to 'Show', @playlist
+\|
+= link_to 'Back', playlists_path

@@ -1,0 +1,18 @@
+%p
+  %b User:
+  = @playlist.user.try(:name)
+%p
+  %b Name:
+  = @playlist.name
+%p
+  %b Playlist:
+  = @playlist.playlist.try(:name)
+
+#video_list
+  = render partial: '/playlists/videos', locals: { playlist: @playlist, word: @word, videos: @videos }
+
+%br
+
+= link_to 'Edit', edit_playlist_path(@playlist)
+\|
+= link_to 'Back', playlists_path

@@ -1,4 +1,8 @@
 Funbox::Application.routes.draw do
+  resources :playlists do
+    resources :track, only: [:index, :create, :destroy]
+  end
+
   root to: 'top#index'
 
   # For OmniAuth

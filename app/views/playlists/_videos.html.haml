@@ -1,0 +1,13 @@
+#track_list
+  = render partial: '/playlists/tracks', locals: { tracks: playlist.tracks }
+
+= form_tag playlist_path(playlist), method: :get do
+  = text_field_tag :word, word, { size: 50 }
+  = submit_tag '検索', data: { disable_with: '検索' }
+
+%br
+
+- videos.each do |v|
+  - unless @unique_ids.index(v.unique_id)
+    %span{ id: "add_video_#{v.unique_id}" }
+      = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
