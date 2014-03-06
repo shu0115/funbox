@@ -14,7 +14,7 @@ class PlaylistsController < ApplicationController
 
     if word.present?
       # YouTube検索
-      videos = YouTubeIt::Client.new.videos_by(query: word, order_by: 'viewCount').videos
+      videos = YouTubeIt::Client.new.videos_by(query: word, order_by: 'viewCount', max_results: 50).videos
       # プレイリスト登録済み動画除外
       videos.delete_if{ |v| @unique_ids.index(v.unique_id) }
       @videos = Kaminari.paginate_array(videos).page(page).per(Settings.per_page)
