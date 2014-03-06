@@ -1,6 +1,7 @@
 - if tracks.present?
   %h2 Play All
-  %iframe{ width: "280", height: "157", src: "https://www.youtube.com/embed/?playlist=#{tracks.map { |t| t.unique_id }.join(',')}", frameborder: "0", allowfullscreen: true}
+  %center
+    %iframe{ width: "854", height: "510", src: "https://www.youtube.com/embed/?playlist=#{tracks.map { |t| t.unique_id }.join(',')}", frameborder: "0", allowfullscreen: true}
   %br
   %h2 Play List
   - tracks.each do |track|
