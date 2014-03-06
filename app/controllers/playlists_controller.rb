@@ -13,12 +13,8 @@ class PlaylistsController < ApplicationController
 
     if word.present?
       # YouTube検索
-      # videos = YouTubeIt::Client.new.videos_by(query: word, page: 1, per_page: 3).videos
       videos = YouTubeIt::Client.new.videos_by(query: word).videos
-      puts "[ ---------- videos class ---------- ]" ; videos.class.tapp ;
-      puts "[ ---------- videos length ---------- ]" ; videos.length.tapp ;
       @videos = Kaminari.paginate_array(videos).page(page).per(3)
-      puts "[ ---------- @videos length ---------- ]" ; @videos.length.tapp ;
     else
       @videos = []
     end
