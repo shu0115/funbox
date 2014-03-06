@@ -1,6 +1,6 @@
 - if tracks.present?
   %h3 Play All
-  %iframe{ width: "280", height: "157", src: "http://www.youtube.com/embed/?playlist=#{tracks.pluck(:unique_id).join(',')}", frameborder: "0", allowfullscreen: true}
+  %iframe{ width: "280", height: "157", src: "https://www.youtube.com/embed/?playlist=#{tracks.pluck(:unique_id).join(',')}", frameborder: "0", allowfullscreen: true}
   %br
   %h3 Play List
   - tracks.each do |track|

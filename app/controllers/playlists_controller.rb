@@ -10,6 +10,7 @@ class PlaylistsController < ApplicationController
   def show(id, word, page)
     @playlist = Playlist.find(id)
     @unique_ids = @playlist.tracks.pluck(:unique_id)
+    word = word.presence || @playlist.name
 
     if word.present?
       # YouTube検索

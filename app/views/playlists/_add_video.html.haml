@@ -1,5 +1,5 @@
 - if v.present?
-  %iframe{ width: "280", height: "157", src: "http://www.youtube.com/embed/#{v.unique_id}", frameborder: "0", allowfullscreen: true}
+  %iframe{ width: "280", height: "157", src: "https://www.youtube.com/embed/#{v.unique_id}", frameborder: "0", allowfullscreen: true}
   %br
   = "#{v.author.name}"
   = "#{Duration.new(v.duration).format('%H:%M:%S')}"
@@ -23,6 +23,7 @@
     = submit_tag 'Add', data: { disable_with: 'Add' }
   %br
 - else
+  - # プレイリストの更新
   :javascript
     $(function() {
       refresh_track_list(#{playlist.id});
