@@ -7,7 +7,18 @@
 
 %br
 
+%h2 検索結果
+
+= render partial: '/common/pagination', locals: { list: videos }
+
+%br
+
 - videos.each do |v|
+  - # プレイリストに追加済みの動画を除外する
   - unless @unique_ids.index(v.unique_id)
     %span{ id: "add_video_#{v.unique_id}" }
       = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
+
+%br
+
+= render partial: '/common/pagination', locals: { list: videos }
