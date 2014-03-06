@@ -8,9 +8,9 @@ class TrackController < ApplicationController
   end
 
   # 動画追加
-  def create(playlist_id, word, video)
+  def create(playlist_id, word, video, page)
     playlist = Playlist.find_by(id: playlist_id, user_id: current_user.id)
-    videos = YouTubeIt::Client.new.videos_by(query: word, page: 1, per_page: Settings.per_page).videos
+    videos = YouTubeIt::Client.new.videos_by(query: word, page: page, per_page: Settings.per_page).videos
 
     track = Track.where(user_id: current_user.id, playlist_id: playlist.id, unique_id: video['unique_id'], provider: 'youtube').first_or_create(
       author_name: video['author_name'],
