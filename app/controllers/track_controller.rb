@@ -34,6 +34,6 @@ class TrackController < ApplicationController
     track = Track.find_by(user_id: current_user.id, playlist_id: playlist_id, id: id)
     track.destroy
 
-    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: playlist.tracks }
+    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: playlist.tracks.order(created_at: :asc) }
   end
 end
