@@ -3,12 +3,15 @@
 %br
 
 - if @tracks.present?
-  %center
+  .text-center
     = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
     %table
       - @unique_ids.each_slice(5) do |ids|
         %tr
         - ids.each do |id|
           - track = @tracks_hash[id]
-          %td= image_tag track.thumbnail_url, width: "280", height: "157"
+          %td{ style: 'padding: 5px;' }
+            = render partial: '/common/video_thumbnail', locals: { track: track }
+
+
 %br

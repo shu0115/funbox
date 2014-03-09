@@ -28,6 +28,10 @@ $(function(){
     var target = $(this).data('update-target');
     $('#' + target).html(data);
   });
+
+  // ツールチップ
+  $('a[rel=tooltip]').tooltip();
+  $('a[rel=popover]').popover({ html: true, placement: 'top', trigger: 'hover' });
 });
 
 // プレイオール更新

@@ -1,5 +1,5 @@
 - if v.present?
-  %iframe{ width: "280", height: "157", src: "https://www.youtube.com/embed/#{v.unique_id}", frameborder: "0", allowfullscreen: true}
+  %iframe{ width: "427", height: "255", src: "https://www.youtube.com/embed/#{v.unique_id}", frameborder: "0", allowfullscreen: true}
   %br
   = "#{v.author.name}"
   = "#{Duration.new(v.duration).format('%H:%M:%S')}"

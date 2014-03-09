@@ -10,18 +10,16 @@
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
   %body{ 'data-no-turbolink' => true }
+    .navbar-collapse.collapse.navbar-responsive-collapse
+      %ul.nav.navbar-nav
+        %li= link_to Settings.app_name, :root, class: 'navbar-brand'
+        - if signed_in?
+          %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
+          %li= link_to "Playlist", playlists_path
+          %li= link_to "Sign out", logout_path
+        - else
+          %li= link_to "Sign in with Twitter", "/auth/twitter"
     .container
-      = link_to Settings.app_name, :root
-      - if signed_in?
-        = render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
-        / = link_to "Top", root_path
-        = link_to "Playlist", playlists_path
-        = link_to "Sign out", logout_path
-      - else
-        Login:
-        \#{link_to "Twitter", "/auth/twitter"}
-        / \#{link_to "Facebook", "/auth/facebook"}
-        / \#{link_to "GitHub", "/auth/github"}
       = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
       = simple_format(flash[:alert], style: "color: red;") if flash[:alert].present?
       = yield

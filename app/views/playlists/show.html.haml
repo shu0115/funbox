@@ -13,8 +13,8 @@
 
 - # 検索フォーム
 = form_tag search_playlist_path(id: @playlist.id, word: @word), method: :get, remote: :true, data: { update_target: 'search_result_area' } do
-  = text_field_tag :word, @word, { size: 50 }
-  = submit_tag '検索', data: { disable_with: '検索' }, onclick: "$('#search_result_list').empty(); $('#search_result_area_loading').show();"
+  = text_field_tag :word, @word, { class: 'form-control width_50' }
+  = submit_tag '検索', data: { disable_with: '検索' }, onclick: "$('#search_result_list').empty(); $('#search_result_area_loading').show();", class: 'btn btn-primary'
 
 %br
 

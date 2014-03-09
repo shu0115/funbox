@@ -13,3 +13,16 @@
  *= require cyborg/bootswatch
  *
  */
+
+.form-control.width_50 {
+  width: 500px;
+  float: left;
+}
+
+table td a{
+  text-decoration: none;
+}
+
+table td{
+  padding: 5px;
+}
