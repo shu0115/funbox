@@ -4,11 +4,11 @@
 
 - if @tracks.present?
   %center
-    = render partial: '/common/playall', locals: { tracks: @tracks, shuffle: true }
-    / %iframe{ width: "854", height: "510", src: "https://www.youtube.com/embed/?playlist=#{Track.shuffle_ids(@tracks)}", frameborder: "0", allowfullscreen: true}
+    = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
     %table
-      - @tracks.each_slice(5) do |list|
+      - @unique_ids.each_slice(5) do |ids|
         %tr
-        - list.each do |track|
+        - ids.each do |id|
+          - track = @tracks_hash[id]
           %td= image_tag track.thumbnail_url, width: "280", height: "157"
 %br

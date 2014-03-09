@@ -7,7 +7,7 @@
 
 - # Play All
 #tracks
-  = render partial: '/playlists/tracks', locals: { playlist: @playlist, tracks: @tracks }
+  = render partial: '/playlists/tracks', locals: { playlist: @playlist, tracks: @tracks, unique_ids: Track.unique_ids(@tracks, shuffle: params[:shuffle]) }
 %br
 %br
 

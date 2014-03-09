@@ -1,10 +1,10 @@
 class TrackController < ApplicationController
-  # プレイオール
+  # Add時のPlayAll動画更新用
   def index(playlist_id)
     playlist = Playlist.includes(:tracks).mine(current_user).find_by(id: playlist_id)
     tracks   = playlist.tracks.order(created_at: :asc)
 
-    render partial: '/playlists/play_all_area', locals: { playlist: playlist, tracks: tracks }
+    render partial: '/playlists/play_all_area', locals: { playlist: playlist, tracks: tracks, unique_ids: Track.unique_ids(tracks, shuffle: false) }
   end
 
   # 動画追加
@@ -29,9 +29,11 @@ class TrackController < ApplicationController
   # トラック削除
   def destroy(playlist_id, id)
     playlist = Playlist.find_by(id: playlist_id)
+    tracks = playlist.tracks.order(created_at: :asc)
+
     track = Track.find_by(user_id: current_user.id, playlist_id: playlist_id, id: id)
     track.destroy
 
-    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: playlist.tracks.order(created_at: :asc) }
+    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: tracks, unique_ids: Track.unique_ids(tracks, shuffle: false) }
   end
 end

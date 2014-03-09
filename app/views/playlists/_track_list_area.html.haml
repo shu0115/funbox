@@ -1,4 +1,11 @@
 - # Track List
-- tracks.each do |track|
-  = image_tag track.thumbnail_url, width: "280", height: "157"
-  = link_to "Delete", playlist_track_path(playlist_id: track.playlist_id, id: track.id), data: { confirm: "「#{track.title}」を削除します。よろしいですか？", method: 'delete', remote: true, update_target: "tracks" }
+%table
+  - tracks_hash = tracks.index_by{ |x| x.unique_id }
+  - unique_ids.each_slice(5) do |ids|
+    %tr
+    - ids.each do |id|
+      - track = tracks_hash[id]
+      %td
+        = image_tag track.thumbnail_url, width: "280", height: "157"
+        %br
+        = link_to "Delete", playlist_track_path(playlist_id: track.playlist_id, id: track.id), data: { confirm: "「#{track.title}」を削除します。よろしいですか？", method: 'delete', remote: true, update_target: "tracks" }

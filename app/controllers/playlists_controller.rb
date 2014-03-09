@@ -3,8 +3,8 @@ class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:destroy, :search]
 
   # GET /playlists
-  def index
-    @playlists = Playlist.all
+  def index(user_id: current_user.id)
+    @playlists = Playlist.where(user_id: user_id).all
   end
 
   # GET /playlists/1

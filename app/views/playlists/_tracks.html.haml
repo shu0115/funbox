@@ -1,5 +1,5 @@
 - if tracks.present?
   #play_all_area
-    = render partial: '/playlists/play_all_area', locals: { playlist: playlist, tracks: tracks }
+    = render partial: '/playlists/play_all_area', locals: { playlist: playlist, tracks: tracks, unique_ids: unique_ids }
   #track_list_area
-    = render partial: '/playlists/track_list_area', locals: { tracks: tracks }
+    = render partial: '/playlists/track_list_area', locals: { tracks: tracks, unique_ids: unique_ids }

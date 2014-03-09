@@ -29,13 +29,12 @@ class Track < ActiveRecord::Base
       return videos
     end
 
-    # ID羅列
-    def id_list(tracks, shuffle=false)
-      if shuffle.present?
-        tracks.map { |t| t.unique_id }.shuffle.join(',')
-      else
-        tracks.map { |t| t.unique_id }.join(',')
-      end
+    # 動画のユニークIDリスト
+    def unique_ids(tracks, shuffle: false)
+      ids = tracks.map { |t| t.unique_id }
+      ids = ids.shuffle if shuffle.present?
+
+      return ids
     end
 
     # ランダム抽出
