@@ -6,7 +6,7 @@ class TrackController < ApplicationController
     # tracks   = Track.where(user_id: current_user.id, playlist_id: playlist.id).tracks
     tracks   = playlist.tracks.mine(current_user)
 
-    render partial: '/playlists/tracks', locals: { tracks: tracks }
+    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: tracks }
   end
 
   # 動画追加
@@ -34,6 +34,6 @@ class TrackController < ApplicationController
     track = Track.find_by(user_id: current_user.id, playlist_id: playlist_id, id: id)
     track.destroy
 
-    render partial: '/playlists/tracks', locals: { tracks: playlist.tracks }
+    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: playlist.tracks }
   end
 end
