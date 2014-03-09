@@ -1,0 +1,12 @@
+- if videos.present?
+  %h2 検索結果
+
+  %p= render partial: '/common/pagination', locals: { list: videos }
+  %p= link_to 'Reload', playlist_path(playlist)
+
+  - videos.each do |v|
+    %span{ id: "add_video_#{v.unique_id}" }
+      = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
+
+  %p= link_to 'Reload', playlist_path(playlist)
+  %p= render partial: '/common/pagination', locals: { list: videos }

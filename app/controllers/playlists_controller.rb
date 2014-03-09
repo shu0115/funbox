@@ -1,5 +1,6 @@
 class PlaylistsController < ApplicationController
   permits :user, :name, :playlist
+  before_action :set_playlist, only: [:destroy, :search]
 
   # GET /playlists
   def index
@@ -9,19 +10,23 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1
   def show(id, word, page)
     @playlist = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
-    @unique_ids = @playlist.tracks.pluck(:unique_id)
-    word = word.presence || @playlist.name
+    @unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
+    @word = word.presence || @playlist.name
 
-    if word.present?
-      # YouTube検索
-      videos = YouTubeIt::Client.new.videos_by(query: word, order_by: 'viewCount', max_results: 50).videos
-      # プレイリスト登録済み動画除外
-      videos.delete_if{ |v| @unique_ids.index(v.unique_id) }
-      @videos = Kaminari.paginate_array(videos).page(page).per(Settings.per_page)
-    else
-      @videos = []
+    # トラックが1つも存在しなければ検索を行う
+    unless @playlist.tracks.exists?
+      @videos = Track.youtube_search(@word, @unique_ids, page)
     end
-    @word = word
+
+    # if word.present?
+    #   # YouTube検索
+    #   videos = YouTubeIt::Client.new.videos_by(query: word, order_by: 'viewCount', max_results: 50).videos
+    #   # プレイリスト登録済み動画除外
+    #   videos.delete_if{ |v| @unique_ids.index(v.unique_id) }
+    #   @videos = Kaminari.paginate_array(videos).page(page).per(Settings.per_page)
+    # else
+    #   @videos = []
+    # end
   end
 
   # # 動画追加
@@ -79,9 +84,25 @@ class PlaylistsController < ApplicationController
 
   # DELETE /playlists/1
   def destroy(id)
-    @playlist = Playlist.find(id)
-    @playlist.destroy
+    current_user.playlists.find_by(id: id).destroy
+    # @playlist = Playlist.find(id)
+    # @playlist.mine.destroy
 
     redirect_to playlists_url
+  end
+
+  # Youtube検索
+  def search(id, word, page)
+    unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
+    videos = Track.youtube_search(word, unique_ids, page)
+
+    render partial: '/playlists/search_result', locals: { videos: videos, playlist: @playlist, word: word }
+  end
+
+  private
+
+  # プレイリスト取得
+  def set_playlist
+    @playlist = Playlist.find_by(id: params[:id])
   end
 end

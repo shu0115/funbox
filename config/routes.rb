@@ -3,6 +3,9 @@ Funbox::Application.routes.draw do
 
   resources :playlists do
     resources :track, only: [:index, :create, :destroy]
+    member do
+      get 'search'
+    end
   end
 
   # For OmniAuth

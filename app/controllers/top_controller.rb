@@ -3,5 +3,6 @@ class TopController < ApplicationController
 
   # トップ
   def index
+    @tracks = Track.random_tracks(100)
   end
 end

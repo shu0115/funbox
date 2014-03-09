@@ -1,10 +1,12 @@
 class TrackController < ApplicationController
   # トラック一覧
   def index(playlist_id)
-    playlist = Playlist.find_by(id: playlist_id)
-    tracks   = Track.where(user_id: current_user.id, playlist_id: playlist.id)
+    # playlist = Playlist.find_by(id: playlist_id)
+    playlist = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: playlist_id)
+    # tracks   = Track.where(user_id: current_user.id, playlist_id: playlist.id).tracks
+    tracks   = playlist.tracks.mine(current_user)
 
-    render partial: '/playlists/tracks', locals: { tracks: playlist.tracks }
+    render partial: '/playlists/tracks', locals: { tracks: tracks }
   end
 
   # 動画追加

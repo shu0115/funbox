@@ -1,15 +1,21 @@
-%p
-  %b User:
+%h2= @playlist.name
+
+%h4
+  Selected by
   = @playlist.user.try(:name)
-%p
-  %b Name:
-  = @playlist.name
-%p
-  %b Playlist:
-  = @playlist.playlist.try(:name)
+
+/ %p
+/   %b User:
+/   = @playlist.user.try(:name)
+/ %p
+/   %b Name:
+/   = @playlist.name
+/ %p
+/   %b Playlist:
+/   = @playlist.playlist.try(:name)
 
 #video_list
-  = render partial: '/playlists/videos', locals: { playlist: @playlist, word: @word, videos: @videos }
+  = render partial: '/playlists/videos', locals: { playlist: @playlist, tracks: @playlist.tracks, word: @word, videos: @videos }
 
 %br
 

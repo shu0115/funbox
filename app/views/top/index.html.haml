@@ -1,4 +1,14 @@
-%h1
-  Welcome to #{Settings.app_name}.
 
-=render partial: '/top/playlist'
+%br
+%br
+
+- if @tracks.present?
+  %center
+    = render partial: '/common/playall', locals: { tracks: @tracks, shuffle: true }
+    / %iframe{ width: "854", height: "510", src: "https://www.youtube.com/embed/?playlist=#{Track.shuffle_ids(@tracks)}", frameborder: "0", allowfullscreen: true}
+    %table
+      - @tracks.each_slice(5) do |list|
+        %tr
+        - list.each do |track|
+          %td= image_tag track.thumbnail_url, width: "280", height: "157"
+%br
