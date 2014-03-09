@@ -6,14 +6,8 @@
   = @playlist.user.try(:name)
 
 - # Play All
-/ #track_list
 #tracks
   = render partial: '/playlists/tracks', locals: { playlist: @playlist, tracks: @tracks }
-
-/ - # Track List
-/ - @tracks.each do |track|
-/   = image_tag track.thumbnail_url, width: "280", height: "157"
-/   = link_to "Delete", playlist_track_path(playlist_id: track.playlist_id, id: track.id), data: { confirm: "「#{track.title}」を削除します。よろしいですか？", method: 'delete', remote: true, update_target: "track_list" }
 %br
 %br
 
@@ -27,10 +21,6 @@
 - # 検索結果
 #search_result_area
   = render partial: '/playlists/search_result', locals: { videos: @videos, playlist: @playlist, word: @word }
-  / #search_result_list
-  /   = render partial: '/playlists/search_result', locals: { videos: @videos, playlist: @playlist, word: @word }
-  / #search_result_area_loading{ style: 'display: none;' }
-  /   = image_tag 'loading.gif', width: "64", height: "64"
 
 %br
 
