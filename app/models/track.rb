@@ -34,7 +34,7 @@ class Track < ActiveRecord::Base
       if shuffle.present?
         tracks.map { |t| t.unique_id }.shuffle.join(',')
       else
-        tracks.map { |t| t.unique_id }.shuffle.join(',')
+        tracks.map { |t| t.unique_id }.join(',')
       end
     end
 
