@@ -1,7 +1,7 @@
 - # Track List
 %table
   - tracks_hash = tracks.index_by{ |x| x.unique_id }
-  - unique_ids.each_slice(5) do |ids|
+  - unique_ids.each_slice(4) do |ids|
     %tr
     - ids.each do |id|
       - track = tracks_hash[id]
