@@ -1,4 +1,4 @@
 - # Play All
 %center
   = render partial: '/common/playall', locals: { tracks: tracks, unique_ids: unique_ids }
-  %p= link_to 'Shuffle', playlist_path(playlist, shuffle: true)
+  %p= link_to 'Shuffle', playlist_path(playlist, shuffle: true), class: 'btn btn-primary'

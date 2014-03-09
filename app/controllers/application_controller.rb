@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :authenticate           # ログイン認証
   before_filter :reset_session_expires  # セッション有効期限延長
+  http_basic_authenticate_with name: "funbox", password: "79466dfea28100b93486d20e8bc14eba" unless Rails.env.development?
 
   private
 

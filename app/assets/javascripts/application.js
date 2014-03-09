@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require cyborg/loader
+//= require cyborg/bootswatch
 
 $(function(){
   // リモートリンク
@@ -27,6 +28,10 @@ $(function(){
     var target = $(this).data('update-target');
     $('#' + target).html(data);
   });
+
+  // ツールチップ
+  $('a[rel=tooltip]').tooltip();
+  $('a[rel=popover]').popover({ html: true, placement: 'top', trigger: 'hover' });
 });
 
 // プレイオール更新

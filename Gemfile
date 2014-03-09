@@ -61,6 +61,12 @@ gem "coderay"
 gem 'youtube_it'
 gem 'ruby-duration'
 
+# Design Template
+gem 'therubyracer', platforms: :ruby
+gem 'twitter-bootswatch-rails'
+gem 'twitter-bootswatch-rails-fontawesome'
+gem 'twitter-bootswatch-rails-helpers'
+
 group :development do
   gem "pry-rails"
   gem "better_errors"

@@ -5,7 +5,7 @@
     %tr
     - ids.each do |id|
       - track = tracks_hash[id]
-      %td
-        = image_tag track.thumbnail_url, width: "280", height: "157"
-        %br
-        = link_to "Delete", playlist_track_path(playlist_id: track.playlist_id, id: track.id), data: { confirm: "「#{track.title}」を削除します。よろしいですか？", method: 'delete', remote: true, update_target: "tracks" }
+      %td{ style: 'padding: 5px;' }
+        = render partial: '/common/video_thumbnail', locals: { track: track }
+        %div{ style: 'text-align: right; padding: 5px 0px 0px 0px;' }
+          = link_to "Delete", playlist_track_path(playlist_id: track.playlist_id, id: track.id), data: { confirm: "「#{track.title}」を削除します。よろしいですか？", method: 'delete', remote: true, update_target: "tracks" }, class: 'btn btn-danger btn-xs'
