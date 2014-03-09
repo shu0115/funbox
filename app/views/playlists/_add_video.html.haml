@@ -20,7 +20,7 @@
     = hidden_field_tag 'video[favorite_count]', v.favorite_count
     = hidden_field_tag 'video[view_count]', v.view_count
     = hidden_field_tag 'video[player_url]', v.player_url
-    = submit_tag 'Add', data: { disable_with: 'Add' }
+    = submit_tag 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary'
   %br
 - else
   - # プレイリストの更新
