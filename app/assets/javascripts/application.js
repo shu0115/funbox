@@ -29,7 +29,7 @@ $(function(){
   });
 });
 
-// トラックリスト更新
+// プレイオール更新
 function refresh_track_list(playlist_id) {
   $.get(
     // 送信先
@@ -38,7 +38,7 @@ function refresh_track_list(playlist_id) {
     null,
     // コールバック
     function(data, status) {
-      $('#track_list').html(data);
+      $('#play_all_area').html(data);
     },
     // 応答データ形式
     "html"

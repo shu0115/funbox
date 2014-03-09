@@ -1,0 +1,4 @@
+- # Play All
+%center
+  = render partial: '/common/playall', locals: { tracks: tracks, shuffle: params[:shuffle] }
+  %p= link_to 'Shuffle', playlist_path(playlist, shuffle: true)

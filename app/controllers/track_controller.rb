@@ -1,12 +1,11 @@
 class TrackController < ApplicationController
-  # トラック一覧
+  # プレイオール
   def index(playlist_id)
-    # playlist = Playlist.find_by(id: playlist_id)
-    playlist = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: playlist_id)
-    # tracks   = Track.where(user_id: current_user.id, playlist_id: playlist.id).tracks
-    tracks   = playlist.tracks.mine(current_user)
+    playlist = Playlist.includes(:tracks).mine(current_user).find_by(id: playlist_id)
+    tracks   = playlist.tracks.order(created_at: :asc)
 
-    render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: tracks }
+    # render partial: '/playlists/tracks', locals: { playlist: playlist, tracks: tracks }
+    render partial: '/playlists/play_all_area', locals: { playlist: playlist, tracks: tracks }
   end
 
   # 動画追加
@@ -29,6 +28,7 @@ class TrackController < ApplicationController
     render partial: '/playlists/add_video', locals: { v: nil, playlist: playlist }
   end
 
+  # トラック削除
   def destroy(playlist_id, id)
     playlist = Playlist.find_by(id: playlist_id)
     track = Track.find_by(user_id: current_user.id, playlist_id: playlist_id, id: id)

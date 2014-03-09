@@ -9,8 +9,9 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/1
   def show(id, word, page)
-    @playlist = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
-    @unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
+    @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
+    @tracks     = @playlist.tracks
+    @unique_ids = @tracks.pluck(:unique_id)
     @word = word.presence || @playlist.name
 
     # トラックが1つも存在しなければ検索を行う
