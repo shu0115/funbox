@@ -8,14 +8,14 @@ class PlaylistsController < ApplicationController
   end
 
   # GET /playlists/1
-  def show(id, word, page)
+  def show(id, word, page, search: false)
     @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
     @tracks     = @playlist.tracks
     @unique_ids = @tracks.pluck(:unique_id)
     @word = word.presence || @playlist.name
 
     # トラックが1つも存在しなければ検索を行う
-    unless @playlist.tracks.exists?
+    if search.present? or !(@playlist.tracks.exists?)
       @videos = Track.youtube_search(@word, @unique_ids, page)
     end
   end
