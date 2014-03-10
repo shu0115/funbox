@@ -32,6 +32,9 @@ $(function(){
   // ツールチップ
   $('a[rel=tooltip]').tooltip();
   $('a[rel=popover]').popover({ html: true, placement: 'top', trigger: 'hover' });
+
+  // オートページャー
+  if ($('#autopager_on').val() == 'true') { autopager(); };
 });
 
 // プレイオール更新
@@ -49,3 +52,37 @@ function refresh_track_list(playlist_id) {
     "html"
   );
 };
+
+// オートページャー
+function autopager() {
+  $(window).scroll(function() {
+    var obj = $(this);
+    var current = $(window).scrollTop() + window.innerHeight;
+    if (current < $(document).height() - 200) return; // 下部に達していなければリターン
+    if (obj.data('loading')) { return };  // ロード中であればリターン
+
+    // パラメータ
+    var page          = parseInt($('#current_page').val());
+    var next_page     = page + 1
+    var total_page    = parseInt($('#num_pages').val());
+    var playlist_id   = $('#playlist_id').val();
+    var word          = $('#word').val();
+
+    if (page < total_page) {
+      obj.data('loading', true);  // ローディングフラグON
+      $("#search_result_area_loading").show()
+      $.get(
+        "/playlists/" + playlist_id + "/search_pager",
+        // 送信データ
+        { 'page': next_page, 'word': word },
+        function(data, status) {
+          $("#search_result_area_loading").hide();
+          $('#page_' + page).after(data);  // データ追加
+          $('#current_page').val(next_page);
+          obj.data('loading', false);      // ローディング解除
+        },
+        "html"                             // 応答データ形式
+      );
+    };
+  });
+}

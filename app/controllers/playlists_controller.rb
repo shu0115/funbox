@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
   permits :user, :name, :playlist
-  before_action :set_playlist, only: [:destroy, :search]
+  before_action :set_playlist, only: [:destroy, :search, :search_pager]
 
   # GET /playlists
   def index(user_id: current_user.id)
@@ -66,6 +66,14 @@ class PlaylistsController < ApplicationController
     videos = Track.youtube_search(word, unique_ids, page)
 
     render partial: '/playlists/search_result', locals: { videos: videos, playlist: @playlist, word: word }
+  end
+
+  # Youtube検索オートページャー
+  def search_pager(id, word, page)
+    unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
+    videos = Track.youtube_search(word, unique_ids, page)
+
+    render partial: '/playlists/search_pager', locals: { videos: videos, playlist: @playlist, word: word }
   end
 
   private

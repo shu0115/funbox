@@ -2,15 +2,23 @@
   - if videos.present?
     %h2 検索結果
 
-    %p= render partial: '/common/pagination', locals: { list: videos }
+    / %p= render partial: '/common/pagination', locals: { list: videos }
     %p= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
 
-    - videos.each do |v|
-      %span{ id: "add_video_#{v.unique_id}" }
-        = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
+    %div{ id: "page_#{videos.current_page}" }
+      - videos.each do |v|
+        %span{ id: "add_video_#{v.unique_id}" }
+          = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
 
     %p= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
-    %p= render partial: '/common/pagination', locals: { list: videos }
+    / %p= render partial: '/common/pagination', locals: { list: videos }
 
 #search_result_area_loading{ style: 'display: none;' }
   = image_tag 'loading.gif', width: "64", height: "64"
+
+/ オートページャー用
+= hidden_field_tag :autopager_on, true
+- if videos.present?
+  = hidden_field_tag :current_page, videos.current_page
+  = hidden_field_tag :num_pages,    videos.num_pages
+  = hidden_field_tag :playlist_id,    playlist.id

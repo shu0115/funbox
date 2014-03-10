@@ -1,0 +1,4 @@
+%div{ id: "page_#{videos.current_page}" }
+  - videos.each do |v|
+    %span{ id: "add_video_#{v.unique_id}" }
+      = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
