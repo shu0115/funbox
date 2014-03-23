@@ -8,9 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require cyborg/loader
  *= require cyborg/bootswatch
+ *= require_self
  *
  */
 
@@ -19,10 +19,27 @@
   float: left;
 }
 
-table td a{
+table a, .table a{
   text-decoration: none;
 }
 
 table td{
   padding: 5px;
+}
+
+.left_margin_10 {
+  margin: 0px 0px 0px 10px;
+}
+
+.top_margin_10 {
+  margin: 10px 0px 0px 0px;
+}
+
+.add_videos_margin {
+  margin: 30px 0px 0px 0px;
+}
+
+.title_logo {
+  font-family: 'Times New Roman';
+  font-size: 30px;
 }

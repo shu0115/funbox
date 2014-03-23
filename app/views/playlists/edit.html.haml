@@ -1,8 +1,10 @@
 %h1 プレイリスト編集
 
 = form_for @playlist do |f|
-  = render partial: '/playlists/form', locals: { f: f }
-  / = render 'form'
+  / = render partial: '/playlists/form', locals: { f: f }
+  = f.text_field :name, size: 50, placeholder: 'Playlist Name'
+  .actions
+    = f.submit 'Update', data: { disable_with: 'Update' }
 
 = link_to 'Show', @playlist
 \|

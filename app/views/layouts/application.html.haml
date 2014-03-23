@@ -12,7 +12,8 @@
   %body{ 'data-no-turbolink' => true }
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
-        %li= link_to Settings.app_name, :root, class: 'navbar-brand'
+        / %li.title_logo= link_to Settings.app_name, :root, class: 'navbar-brand'
+        %li.title_logo= link_to Settings.app_name, :root, class: ''
         - if signed_in?
           %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
           %li= link_to "Playlist", playlists_path

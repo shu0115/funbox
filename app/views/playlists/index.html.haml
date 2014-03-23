@@ -1,20 +1,26 @@
-%h1 プレイリスト一覧
+%h1 Playlists
 
-%table
+= form_for @playlist do |f|
+  = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 300px; float: left;'
+  = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
+
+%br
+
+%table.table.table-striped.table-hover{ style: 'width: 500px;'}
   %tr
-    %th User
+    / %th User
     %th Name
-    %th Playlist
-    %th
+    %th Souce
     %th
 
   - @playlists.each do |playlist|
     %tr
-      %td= playlist.user.try(:name)
-      %td= link_to playlist.name, playlist
+      / %td= playlist.user.try(:name)
+      %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist
       %td= playlist.playlist.try(:name)
-      %td= link_to 'Edit', edit_playlist_path(playlist)
-      %td= link_to 'Destroy', playlist, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td
+        = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary'
+        = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger'
 
 %br
 
