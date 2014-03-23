@@ -39,12 +39,6 @@ class PlaylistsController < ApplicationController
     @playlist.save!
 
     redirect_to playlists_path and return
-
-    # if @playlist.save
-    #   redirect_to @playlist, notice: 'Playlist was successfully created.'
-    # else
-    #   render action: 'new'
-    # end
   end
 
   # PUT /playlists/1

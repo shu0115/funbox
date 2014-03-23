@@ -1,5 +1,6 @@
-- if tracks.present?
-  #play_all_area
+#play_all_area
+  - if tracks.present?
     = render partial: '/playlists/play_all_area', locals: { playlist: playlist, tracks: tracks, unique_ids: unique_ids }
-  #track_list_area
+#track_list_area
+  - if tracks.present?
     = render partial: '/playlists/track_list_area', locals: { tracks: tracks, unique_ids: unique_ids }
