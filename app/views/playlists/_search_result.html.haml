@@ -1,13 +1,14 @@
 #search_result_list
   - if videos.present?
-    %h2 検索結果
+    %h2 Search Result
 
     %p.text-center= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
 
-    %div{ id: "page_#{videos.current_page}" }
-      - videos.each do |v|
-        %span{ id: "add_video_#{v.unique_id}" }
-          = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
+    .container{ style: 'width: 500px;'}
+      %div{ id: "page_#{videos.current_page}" }
+        - videos.each do |v|
+          %span{ id: "add_video_#{v.unique_id}" }
+            = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
 
     %p.text-center= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
 

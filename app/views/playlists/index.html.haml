@@ -1,13 +1,13 @@
-.container{ style: 'width: 600px'}
+.container{ style: 'width: 700px'}
   %h1 Playlists
 
   = form_for @playlist do |f|
-    = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 400px; float: left;'
+    = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 600px; float: left;'
     = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
-
+  %br
   %br
 
-  %table.table.table-striped.table-hover{ style: 'width: 600px;'}
+  %table.table.table-striped.table-hover{ style: 'width: 700px;'}
     %tr
       / %th User
       %th Name
