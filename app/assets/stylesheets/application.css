@@ -14,6 +14,10 @@
  *
  */
 
+.page_top_margin {
+  margin: 50px 0px 0px 0px;
+}
+
 .form-control.width_50 {
   width: 500px;
   float: left;
@@ -42,4 +46,9 @@ table td{
 .title_logo {
   font-family: 'Times New Roman';
   font-size: 30px;
+  color: #2a9fd6;
+}
+
+.navbar-default .navbar-brand {
+  color: #2a9fd6;
 }

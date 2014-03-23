@@ -1,27 +1,28 @@
-%h1 Playlists
+.container{ style: 'width: 500px'}
+  %h1 Playlists
 
-= form_for @playlist do |f|
-  = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 300px; float: left;'
-  = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
+  = form_for @playlist do |f|
+    = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 300px; float: left;'
+    = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
 
-%br
+  %br
 
-%table.table.table-striped.table-hover{ style: 'width: 500px;'}
-  %tr
-    / %th User
-    %th Name
-    %th Souce
-    %th
-
-  - @playlists.each do |playlist|
+  %table.table.table-striped.table-hover{ style: 'width: 500px;'}
     %tr
-      / %td= playlist.user.try(:name)
-      %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist
-      %td= playlist.playlist.try(:name)
-      %td
-        = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary'
-        = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger'
+      / %th User
+      %th Name
+      %th Souce
+      %th
 
-%br
+    - @playlists.each do |playlist|
+      %tr
+        / %td= playlist.user.try(:name)
+        %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist
+        %td= playlist.playlist.try(:name)
+        %td
+          = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary'
+          = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger'
 
-= link_to 'New Playlist', new_playlist_path
+  %br
+
+  / = link_to 'New Playlist', new_playlist_path

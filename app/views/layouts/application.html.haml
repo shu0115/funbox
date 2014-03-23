@@ -10,17 +10,19 @@
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
   %body{ 'data-no-turbolink' => true }
-    .navbar-collapse.collapse.navbar-responsive-collapse
-      %ul.nav.navbar-nav
-        / %li.title_logo= link_to Settings.app_name, :root, class: 'navbar-brand'
-        %li.title_logo= link_to Settings.app_name, :root, class: ''
-        - if signed_in?
-          %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
-          %li= link_to "Playlist", playlists_path
-          %li= link_to "Sign out", logout_path
-        - else
-          %li= link_to "Sign in with Twitter", "/auth/twitter"
-    .container
+    .navbar.navbar-default.navbar-fixed-top
+      .navbar-header
+        / = link_to Settings.app_name, :root, class: 'title_logo'
+        = link_to Settings.app_name, :root, class: 'navbar-brand title_logo'
+      .navbar-collapse.collapse.navbar-responsive-collapse
+        %ul.nav.navbar-nav
+          - if signed_in?
+            %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
+            %li= link_to "Playlist", playlists_path
+            %li= link_to "Sign out", logout_path
+          - else
+            %li= link_to "Sign in with Twitter", "/auth/twitter"
+    .container.page_top_margin
       = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
       = simple_format(flash[:alert], style: "color: red;") if flash[:alert].present?
       = yield
