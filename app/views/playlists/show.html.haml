@@ -11,10 +11,10 @@
 %br
 %br
 
-.container{ style: 'width: 650px;'}
+.container{ style: 'width: 700px;' }
   - # 検索フォーム
   = form_tag search_playlist_path(id: @playlist.id, word: @word), method: :get, remote: :true, data: { update_target: 'search_result_area' } do
-    = text_field_tag :word, @word, { class: 'form-control width_50' }
+    = text_field_tag :word, @word, { class: 'form-control', style: 'width: 550px; float: left' }
     = submit_tag 'Search', data: { disable_with: 'Search' }, onclick: "$('#search_result_list').empty(); $('#search_result_area_loading').show(); window.history.pushState(null, null, '#{playlist_path(@playlist, search: true)}');", class: 'btn btn-primary left_margin_10'
 
 %br
