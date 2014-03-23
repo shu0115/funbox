@@ -2,12 +2,12 @@
   %h1 Playlists
 
   = form_for @playlist do |f|
-    = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 300px; float: left;'
+    = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 400px; float: left;'
     = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
 
   %br
 
-  %table.table.table-striped.table-hover{ style: 'width: 500px;'}
+  %table.table.table-striped.table-hover{ style: 'width: 600px;'}
     %tr
       / %th User
       %th Name
