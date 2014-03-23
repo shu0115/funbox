@@ -52,7 +52,8 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.find(id)
 
     if @playlist.update(playlist)
-      redirect_to @playlist, notice: 'Playlist was successfully updated.'
+      # redirect_to @playlist, notice: 'Playlist was successfully updated.'
+      redirect_to playlists_path and return
     else
       render action: 'edit'
     end

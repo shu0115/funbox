@@ -1,11 +1,16 @@
-%h1 プレイリスト編集
+.container{ style: 'width: 600px'}
+  %br
+  %br
+  / %h1 プレイリスト編集
 
-= form_for @playlist do |f|
-  / = render partial: '/playlists/form', locals: { f: f }
-  = f.text_field :name, size: 50, placeholder: 'Playlist Name'
-  .actions
-    = f.submit 'Update', data: { disable_with: 'Update' }
+  = form_for @playlist do |f|
+    / = render partial: '/playlists/form', locals: { f: f }
+    / = f.text_field :name, size: 50, placeholder: 'Playlist Name'
+    / .actions
+    /   = f.submit 'Update', data: { disable_with: 'Update' }
+    = f.text_field :name, class: 'form-control', style: 'width: 400px; float: left;'
+    = f.submit 'Update', data: { disable_with: 'Update' }, class: 'btn btn-primary left_margin_10'
 
-= link_to 'Show', @playlist
-\|
-= link_to 'Back', playlists_path
+  %br
+
+  = link_to 'List', playlists_path, class: 'btn btn-default'

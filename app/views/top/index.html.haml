@@ -1,10 +1,10 @@
-
 %br
 %br
 
 - if @tracks.present?
   .text-center
-    = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
+    .container{ style: 'width: 700px'}
+      = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
     %table
       - @unique_ids.each_slice(4) do |ids|
         %tr
@@ -12,6 +12,4 @@
           - track = @tracks_hash[id]
           %td{ style: 'padding: 5px;' }
             = render partial: '/common/video_thumbnail', locals: { track: track }
-
-
 %br
