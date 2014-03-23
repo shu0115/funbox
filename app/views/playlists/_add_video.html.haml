@@ -1,5 +1,5 @@
 - if v.present?
-  .container.add_videos_margin{ style: 'width: 500px;' }
+  .add_videos_margin
     .text-center
       %iframe{ width: "427", height: "255", src: "https://www.youtube.com/embed/#{v.unique_id}", frameborder: "0", allowfullscreen: true}
     %br

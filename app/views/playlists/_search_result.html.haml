@@ -4,7 +4,7 @@
 
     %p.text-center= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
 
-    .container{ style: 'width: 500px;'}
+    .container{ style: 'width: 600px;'}
       %div{ id: "page_#{videos.current_page}" }
         - videos.each do |v|
           %span{ id: "add_video_#{v.unique_id}" }
