@@ -24,4 +24,6 @@
   #search_result_area
     = render partial: '/playlists/search_result', locals: { videos: @videos, playlist: @playlist, word: @word }
   %br
-  .text-right= link_to 'List', playlists_path, class: 'btn btn-default'
+  .text-right
+    = link_to 'List', playlists_path, class: 'btn btn-default'
+    = link_to '↑', '#', class: 'btn btn-default'
