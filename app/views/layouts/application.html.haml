@@ -21,10 +21,12 @@
             %li= link_to "Sign out", logout_path
           - else
             %li= link_to "Sign in with Twitter", "/auth/twitter"
-    .container.page_top_margin
-      = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
-      = simple_format(flash[:alert], style: "color: red;") if flash[:alert].present?
-      = yield
+    / .container.page_top_margin
+    .container
+      .page_top_margin
+        = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
+        = simple_format(flash[:alert], style: "color: red;") if flash[:alert].present?
+        = yield
       %br/
       %br/
       %br/

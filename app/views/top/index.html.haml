@@ -2,14 +2,35 @@
 %br
 
 - if @tracks.present?
+  / %center
+  / .text-center
+  / .center-block.text-center{ style: 'width: 1200px' }
+  /   .row
+  /     = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
+  /   .row
+  /     .center-block
   .text-center
-    .container{ style: 'width: 700px'}
-      = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
-    %table
-      - @unique_ids.each_slice(4) do |ids|
-        %tr
-        - ids.each do |id|
-          - track = @tracks_hash[id]
-          %td{ style: 'padding: 5px;' }
-            = render partial: '/common/video_thumbnail', locals: { track: track }
+    = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
+  %br
+  %br
+  %table
+    - @unique_ids.each_slice(4) do |ids|
+      %tr
+      - ids.each do |id|
+        - track = @tracks_hash[id]
+        %td{ style: 'padding: 5px;' }
+          = render partial: '/common/video_thumbnail', locals: { track: track }
+
+  / / .text-center
+  / .container{ style: 'width: 700px'}
+  /   = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
+  / / .container{ style: 'width: 1200px'}
+  / .text-center
+  /   %table
+  /     - @unique_ids.each_slice(4) do |ids|
+  /       %tr
+  /       - ids.each do |id|
+  /         - track = @tracks_hash[id]
+  /         %td{ style: 'padding: 5px;' }
+  /           = render partial: '/common/video_thumbnail', locals: { track: track }
 %br
