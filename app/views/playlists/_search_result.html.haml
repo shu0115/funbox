@@ -9,14 +9,12 @@
         %span{ id: "add_video_#{v.unique_id}" }
           = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
 
-    %p.text-center= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
-
 .text-center
   #search_result_area_loading{ style: 'display: none;' }
     %br
     = image_tag 'loading.gif', width: "48", height: "48"
 
-/ オートページャー用
+- # オートページャー用パラメータ
 = hidden_field_tag :autopager_on, true
 - if videos.present?
   = hidden_field_tag :current_page, videos.current_page

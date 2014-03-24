@@ -2,3 +2,14 @@
   - videos.each do |v|
     %span{ id: "add_video_#{v.unique_id}" }
       = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
+
+- # リロードボタン
+- if videos.last_page?
+  %p.text-center= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
+
+- # List／ページトップアンカー
+- if videos.present? and videos.last_page?
+  %br
+  .text-right
+    = link_to 'List', playlists_path, class: 'btn btn-default'
+    = link_to '↑', '#', class: 'btn btn-default'
