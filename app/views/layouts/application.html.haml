@@ -26,8 +26,10 @@
             %li= link_to "Sign in", "/auth/twitter"
     .container
       .page_top_margin
-        = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
-        = simple_format(flash[:alert], style: "color: red;") if flash[:alert].present?
+        - if flash[:notice].present? or flash[:alert].present?
+          %br
+          = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
+          = simple_format(flash[:alert], style: "color: red;")    if flash[:alert].present?
         = yield
       %br/
       %br/

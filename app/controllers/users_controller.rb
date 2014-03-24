@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   # プレイリスト内トラック再生
   def playlist(user_id, id)
+    session[:request_url] = user_playlist_url(user_id, id) if current_user.blank?
+
     @user       = User.find_by(id: user_id)
     @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
     @tracks     = @playlist.tracks

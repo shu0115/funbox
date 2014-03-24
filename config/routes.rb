@@ -1,7 +1,6 @@
 Funbox::Application.routes.draw do
   root to: 'top#index'
 
-  # resources :users, only: [:index, :show] do
   resources :users, only: [:index] do
     get 'playlists'
     get 'playlist/:id' => 'users#playlist', as: :playlist
@@ -13,6 +12,7 @@ Funbox::Application.routes.draw do
     member do
       get 'search'
       get 'search_pager'
+      post 'fork'
     end
     collection do
       get 'all'

@@ -5,6 +5,10 @@
     Selected by
     = @playlist.user.try(:name)
 
+    - if @playlist.playlist_id.present?
+      = ", From"
+      = link_to @playlist.playlist.name, user_playlist_path(@playlist.playlist.user_id, @playlist.playlist_id)
+
 - # Play All
 #tracks
   = render partial: '/playlists/tracks', locals: { playlist: @playlist, tracks: @tracks, unique_ids: Track.unique_ids(@tracks, shuffle: params[:shuffle]) }
