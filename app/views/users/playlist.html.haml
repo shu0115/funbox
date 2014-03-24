@@ -28,10 +28,10 @@
             - fork_playlist = Playlist.mine(current_user).find_by(playlist_id: @playlist.id)
             - if fork_playlist.present?
               - # フォーク済みプレイリストへのリンク
-              = link_to 'Fork', playlist_path(fork_playlist), class: 'btn btn-primary'
+              = link_to 'Fork', playlist_path(fork_playlist), class: 'btn btn-info'
             - else
               - # フォーク実行
-              = link_to 'Fork', fork_playlist_path(@playlist), method: :post, class: 'btn btn-primary'
+              = link_to 'Fork', fork_playlist_path(@playlist), method: :post, class: 'btn btn-info'
           - else
             = link_to 'Sign in', "/auth/twitter", class: 'btn btn-primary'
         %br
