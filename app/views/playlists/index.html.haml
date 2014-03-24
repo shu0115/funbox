@@ -16,8 +16,10 @@
 
       - @playlists.each do |playlist|
         %tr
-          %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist
-          %td= playlist.playlist.try(:name)
+          %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist_path(playlist)
+          %td{ nowrap: true, style: 'line-height: 38px;' }
+            - if playlist.playlist.present?
+              = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user_id, playlist.playlist_id)
           %td
             = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary'
             = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger'
