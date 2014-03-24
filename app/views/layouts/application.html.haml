@@ -19,6 +19,7 @@
             %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
             %li= link_to "Playlists", playlists_path
             %li= link_to "Play all", all_playlists_path
+            %li= link_to "Goods", goods_path
             %li= link_to "Users", users_path
             %li= link_to "Sign out", logout_path
           - else

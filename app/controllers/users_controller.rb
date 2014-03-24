@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # ユーザ一覧
   def index(page)
-    @users = User.order(created_at: :desc).page(page).per(100)
+    @users = User.order(created_at: :desc).page(page).per(50)
   end
 
   # ユーザのプレイリスト一覧
@@ -28,5 +28,18 @@ class UsersController < ApplicationController
     @tracks      = Track.where(id: Track.mine(@user).pluck(:id).shuffle.first(100))
     @unique_ids  = Track.unique_ids(@tracks, shuffle: true)
     @tracks_hash = @tracks.index_by{ |x| x.unique_id }
+  end
+
+  # プレイリストに対するGood
+  def playlist_good_toggle(id)
+    playlist = Playlist.find_by(id: id)
+    good = Good.where(user_id: current_user.id, playlist_id: playlist.id).first_or_initialize
+    if good.id.present?
+      good.destroy
+    else
+      good.save!
+    end
+
+    render partial: '/users/playlist_good', locals: { playlist: playlist }
   end
 end

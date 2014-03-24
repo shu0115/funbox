@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :playlists
   has_many :tracks
+  has_many :goods
 
   private
 

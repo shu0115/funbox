@@ -3,8 +3,8 @@ class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
 
   # GET /playlists
-  def index(user_id: current_user.id)
-    @playlists = Playlist.where(user_id: user_id).order(created_at: :desc)
+  def index
+    @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
     @playlist  = Playlist.new
   end
 

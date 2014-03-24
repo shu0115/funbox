@@ -3,7 +3,12 @@
 
   %h4
     Selected by
-    = @user.name
+    = @playlist.user.try(:name)
+
+    - if @playlist.playlist_id.present?
+      = ", From"
+      = link_to @playlist.playlist.name, user_playlist_path(@playlist.playlist.user_id, @playlist.playlist_id)
+
 
 - # Play All
 #tracks
@@ -17,6 +22,9 @@
         %p
           = link_to 'Shuffle', user_playlist_path(@user, @playlist, shuffle: true), class: 'btn btn-primary'
           - if current_user.present?
+            %span#playlist_good_button
+              = render partial: '/users/playlist_good', locals: { playlist: @playlist }
+
             - fork_playlist = Playlist.mine(current_user).find_by(playlist_id: @playlist.id)
             - if fork_playlist.present?
               - # フォーク済みプレイリストへのリンク

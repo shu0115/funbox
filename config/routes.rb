@@ -1,10 +1,15 @@
 Funbox::Application.routes.draw do
   root to: 'top#index'
 
+  resources :goods, only: [:index]
+
   resources :users, only: [:index] do
     get 'playlists'
     get 'playlist/:id' => 'users#playlist', as: :playlist
     get 'playall'
+    collection do
+      post 'playlist/:id/good_toggle' => 'users#playlist_good_toggle', as: :playlist_good_toggle
+    end
   end
 
   resources :playlists do

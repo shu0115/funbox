@@ -1,0 +1,7 @@
+
+- if Good.where(user_id: current_user.id, playlist_id: playlist.id).exists?
+  - button_name = 'No Good'
+- else
+  - button_name = 'Good'
+
+= link_to button_name, playlist_good_toggle_users_path(playlist), method: :post, class: 'btn btn-primary', data: { remote: true, update_target: 'playlist_good_button' }

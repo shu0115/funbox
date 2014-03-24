@@ -3,6 +3,9 @@
 
   %br
 
+  - # ページング
+  = paginate @users, outer_window: 3
+
   %table.table.table-striped.table-hover{ style: 'width: 700px;'}
     %tr
       %th Name
@@ -12,3 +15,6 @@
       %tr
         %td{ nowrap: true }= link_to user.name, user_playlists_path(user)
         %td= link_to 'Play all', user_playall_path(user), class: 'btn btn-primary btn-sm'
+
+  - # ページング
+  = paginate @users, outer_window: 3
