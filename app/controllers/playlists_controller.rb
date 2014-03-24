@@ -76,6 +76,13 @@ class PlaylistsController < ApplicationController
     render partial: '/playlists/search_pager', locals: { videos: videos, playlist: @playlist, word: word }
   end
 
+  # プレイリストプレイオール
+  def all
+    @tracks = Track.where(id: Track.mine(current_user).pluck(:id).shuffle.first(100))
+    @unique_ids   = Track.unique_ids(@tracks, shuffle: true)
+    @tracks_hash  = @tracks.index_by{ |x| x.unique_id }
+  end
+
   private
 
   # プレイリスト取得

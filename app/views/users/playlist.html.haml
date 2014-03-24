@@ -1,0 +1,10 @@
+.container{ style: 'width: 900px'}
+  %h2= link_to @playlist.name, playlist_path(@playlist)
+
+  %h4
+    Selected by
+    = @user.name
+
+- # Play All
+#tracks
+  = render partial: '/users/tracks', locals: { playlist: @playlist, tracks: @tracks, unique_ids: Track.unique_ids(@tracks, shuffle: params[:shuffle]) }

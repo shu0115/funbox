@@ -1,0 +1,16 @@
+.container{ style: 'width: 700px'}
+  %h1= "Playlists of #{@user.name}"
+
+  %br
+  %p= link_to 'Play all', user_playall_path(@user), class: 'btn btn-primary'
+  %br
+
+  %table.table.table-striped.table-hover{ style: 'width: 700px;'}
+    %tr
+      %th Name
+      %th Souce
+
+    - @playlists.each do |playlist|
+      %tr
+        %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, user_playlist_path(@user, playlist)
+        %td= playlist.playlist.try(:name)

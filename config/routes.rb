@@ -1,11 +1,21 @@
 Funbox::Application.routes.draw do
   root to: 'top#index'
 
+  # resources :users, only: [:index, :show] do
+  resources :users, only: [:index] do
+    get 'playlists'
+    get 'playlist/:id' => 'users#playlist', as: :playlist
+    get 'playall'
+  end
+
   resources :playlists do
     resources :track, only: [:index, :create, :destroy]
     member do
       get 'search'
       get 'search_pager'
+    end
+    collection do
+      get 'all'
     end
   end
 

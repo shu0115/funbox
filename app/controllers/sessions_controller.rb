@@ -20,7 +20,8 @@ class SessionsController < ApplicationController
       return
     end
 
-    redirect_to :root and return
+    # redirect_to :root and return
+    redirect_to playlists_path and return
   end
 
   # ログアウト

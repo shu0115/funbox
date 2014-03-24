@@ -1,5 +1,5 @@
 .container{ style: 'width: 700px'}
-  %h1 Playlists
+  %h2 Playlists
 
   = form_for @playlist do |f|
     = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 600px; float: left;'
@@ -7,22 +7,18 @@
   %br
   %br
 
-  %table.table.table-striped.table-hover{ style: 'width: 700px;'}
-    %tr
-      / %th User
-      %th Name
-      %th Souce
-      %th
-
-    - @playlists.each do |playlist|
+  - if @playlists.present?
+    %table.table.table-striped.table-hover{ style: 'width: 700px;'}
       %tr
-        / %td= playlist.user.try(:name)
-        %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist
-        %td= playlist.playlist.try(:name)
-        %td
-          = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary'
-          = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger'
+        %th Name
+        %th Souce
+        %th
 
-  %br
-
-  / = link_to 'New Playlist', new_playlist_path
+      - @playlists.each do |playlist|
+        %tr
+          %td{ nowrap: true, style: 'line-height: 38px;' }= link_to playlist.name, playlist
+          %td= playlist.playlist.try(:name)
+          %td
+            = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary'
+            = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger'
+%br
