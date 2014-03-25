@@ -1,6 +1,7 @@
 .container{ style: 'width: 900px'}
   %h2= link_to @playlist.name, playlist_path(@playlist)
 
+
   %h4
     Selected by
     = @playlist.user.try(:name)
@@ -8,6 +9,9 @@
     - if @playlist.playlist_id.present?
       = ", From"
       = link_to @playlist.playlist.name, user_playlist_path(@playlist.playlist.user_id, @playlist.playlist_id)
+
+    = ','
+    = link_to (image_tag 'amazon.png', width: 63, height: 18), "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=カタカナ&url=search-alias%3Daps&field-keywords=#{@playlist.name}&at=#{Settings.amazon_affiliate_id}", target: '_blank'
 
 - # Play All
 #tracks
