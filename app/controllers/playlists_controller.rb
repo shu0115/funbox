@@ -38,7 +38,8 @@ class PlaylistsController < ApplicationController
     @playlist.user = current_user
     @playlist.save!
 
-    redirect_to playlists_path and return
+    # redirect_to playlists_path and return
+    redirect_to playlist_path(@playlist) and return
   end
 
   # PUT /playlists/1

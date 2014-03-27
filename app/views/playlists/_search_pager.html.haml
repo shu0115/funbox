@@ -3,12 +3,11 @@
     %span{ id: "add_video_#{v.unique_id}" }
       = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
 
-- # リロードボタン
-- if videos.last_page?
+- if videos.present? and videos.last_page?
+  - # リロードボタン
   %p.text-center= link_to 'Reload', playlist_path(playlist, search: true), class: 'btn btn-primary'
 
-- # List／ページトップアンカー
-- if videos.present? and videos.last_page?
+  - # List／ページトップアンカー
   %br
   .text-right
     = link_to 'List', playlists_path, class: 'btn btn-default'
