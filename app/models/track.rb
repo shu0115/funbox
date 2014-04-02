@@ -3,7 +3,11 @@ class Track < ActiveRecord::Base
   belongs_to :playlist
 
   # スコープ
-  scope :mine, ->(user) { where( tracks: { user_id: user.id } ) }
+  scope :mine, -> (user) { where( tracks: { user_id: user.id } ) }
+
+  # コールバック
+  after_create  { |track| track.playlist.update(track_count: ActiveRecord::Base.connection.execute("SELECT COUNT(*) FROM tracks WHERE tracks.playlist_id = #{track.playlist_id}")[0][0]) }
+  after_destroy { |track| track.playlist.update(track_count: Track.where(playlist_id: track.playlist_id).count) }
 
   # サムネイル画像URL
   def thumbnail_url

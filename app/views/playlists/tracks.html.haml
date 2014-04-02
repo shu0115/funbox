@@ -12,7 +12,6 @@
     = ','
     = link_to (image_tag 'amazon.png', width: 63, height: 18), "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=カタカナ&url=search-alias%3Daps&field-keywords=#{@playlist.name}&at=#{Settings.amazon_affiliate_id}", target: '_blank'
 
-
   - # Play All
   .text-center
     = render partial: '/common/playall', locals: { tracks: @playlist.tracks, unique_ids: @unique_ids }
