@@ -29,16 +29,16 @@
             %li= link_to "Popular", popular_playlists_path
             %li= link_to "Users", users_path
             %li= link_to "Sign in", "/auth/twitter"
-    .container
-      .page_top_margin
-        - if flash[:notice].present? or flash[:alert].present?
-          %br
-          = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
-          = simple_format(flash[:alert], style: "color: red;")    if flash[:alert].present?
-        = yield
-      %br/
-      %br/
-      %br/
+    / .container
+    .page_top_margin
+      - if flash[:notice].present? or flash[:alert].present?
+        %br
+        = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
+        = simple_format(flash[:alert], style: "color: red;")    if flash[:alert].present?
+      = yield
+    %br/
+    %br/
+    %br/
     .text-center
       Developed by
       %a{ href: "https://twitter.com/#{Settings.programmer_twitter_id}/", target: "_blank" }

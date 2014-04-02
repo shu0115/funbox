@@ -1,16 +1,17 @@
 %br
 %br
 
-- if @tracks.present?
-  .text-center
-    = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
-  %br
-  %br
-  %table
-    - @unique_ids.each_slice(4) do |ids|
-      %tr
-      - ids.each do |id|
-        - track = @tracks_hash[id]
-        %td{ style: 'padding: 5px;' }
-          = render partial: '/common/video_thumbnail', locals: { track: track }
+.container{ style: 'width: 1160px; padding: 0 0 0 0;'}
+  - if @tracks.present?
+    .text-center
+      = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
+    %br
+    %br
+    %table
+      - @unique_ids.each_slice(4) do |ids|
+        %tr
+        - ids.each do |id|
+          - track = @tracks_hash[id]
+          %td{ style: 'padding: 5px;' }
+            = render partial: '/common/video_thumbnail', locals: { track: track }
 %br

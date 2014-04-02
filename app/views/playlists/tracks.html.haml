@@ -36,13 +36,16 @@
         = link_to 'Sign in', "/auth/twitter", class: 'btn btn-primary'
     %br
 
-- if @playlist.tracks.present?
-  - # Track List
-  %table
-    - tracks_hash = @playlist.tracks.index_by{ |x| x.unique_id }
-    - @unique_ids.each_slice(4) do |ids|
-      %tr
-      - ids.each do |id|
-        - track = tracks_hash[id]
-        %td{ style: 'padding: 5px;' }
-          = render partial: '/common/video_thumbnail', locals: { track: track }
+.container{ style: 'width: 1160px; padding: 0 0 0 0;'}
+  - if @playlist.tracks.present?
+    - # Track List
+    %table
+      - tracks_hash = @playlist.tracks.index_by{ |x| x.unique_id }
+      - @unique_ids.each_slice(4) do |ids|
+        %tr
+        - ids.each do |id|
+          - track = tracks_hash[id]
+          %td{ style: 'padding: 5px;' }
+            = render partial: '/common/video_thumbnail', locals: { track: track }
+%br
+%br
