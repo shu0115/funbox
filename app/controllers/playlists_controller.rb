@@ -1,6 +1,25 @@
 class PlaylistsController < ApplicationController
   permits :user, :name, :playlist
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
+  skip_before_filter :authenticate, only: [:recent, :popular, :tracks]
+
+  # 新着順
+  def recent
+    @playlists = Playlist.active.order(created_at: :desc)
+  end
+
+  # 人気順
+  def popular
+    @playlists = Playlist.active.order(view_count: :desc, created_at: :desc)
+  end
+
+  # プレイリスト再生
+  def tracks(id, shuffle)
+    session[:request_url] = tracks_playlist_url(id) if current_user.blank?
+    @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: id)
+    # @unique_ids = @playlist.tracks.pluck(:unique_id)
+    @unique_ids = Track.unique_ids(@playlist.tracks, shuffle: shuffle)
+  end
 
   # GET /playlists
   def index
@@ -15,8 +34,6 @@ class PlaylistsController < ApplicationController
     @unique_ids = @tracks.pluck(:unique_id)
     @word = word.presence || @playlist.name
 
-    # ×トラックが1つも存在しなければ検索を行う
-    # if search.present? or !(@playlist.tracks.exists?)
     if search.present?
       @videos = Track.youtube_search(@word, @unique_ids, page)
     end

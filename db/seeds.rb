@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Playlist.all.each do |playlist|
+  playlist.update!(track_count: playlist.tracks.count)
+end

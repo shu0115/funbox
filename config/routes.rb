@@ -15,12 +15,15 @@ Funbox::Application.routes.draw do
   resources :playlists do
     resources :track, only: [:index, :create, :destroy]
     member do
-      get 'search'
-      get 'search_pager'
+      get  'search'
+      get  'search_pager'
       post 'fork'
+      get  'tracks'
     end
     collection do
       get 'all'
+      get 'recent'
+      get 'popular'
     end
   end
 

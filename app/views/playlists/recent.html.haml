@@ -1,0 +1,24 @@
+.container{ style: 'width: 700px'}
+  %h2 Recent Playlists
+
+  - if @playlists.present?
+    %table.table.table-striped.table-hover{ style: 'width: 700px;'}
+      %tr
+        %th User
+        %th Name
+        %th Souce
+        %th Tracks
+        %th
+
+      - @playlists.each do |playlist|
+        %tr
+          %td{ nowrap: true }
+            = render partial: '/layouts/user_icon', locals: { user: playlist.user, size: "18x18", klass: "margin_minus2" }
+            = '　'
+            = link_to playlist.user.name, user_playlists_path(playlist.user) if playlist.user.present?
+          %td{ nowrap: true, style: 'line-height: 30px;' }
+            = link_to playlist.name, tracks_playlist_path(playlist)
+          %td{ nowrap: true, style: 'line-height: 30px;' }
+            - if playlist.playlist.present?
+              = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user_id, playlist.playlist_id) rescue nil
+          %td= playlist.track_count

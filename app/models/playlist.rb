@@ -4,7 +4,8 @@ class Playlist < ActiveRecord::Base
   has_many   :tracks, dependent: :destroy
   has_many   :goods
 
-  scope :mine, ->(user) { where( playlists: { user_id: user.id } ) }
+  scope :mine,   -> (user) { where( playlists: { user_id: user.id } ) }
+  scope :active, -> { where('playlists.track_count > 0') }
 
   validates :name, presence: true
 

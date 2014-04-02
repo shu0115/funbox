@@ -60,6 +60,7 @@ gem "redcarpet"
 gem "coderay"
 gem 'youtube_it'
 gem 'ruby-duration'
+gem 'addressable', '2.3.5'
 
 # Design Template
 gem 'therubyracer', platforms: :ruby
