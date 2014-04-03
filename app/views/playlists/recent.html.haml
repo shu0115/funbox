@@ -6,14 +6,16 @@
 
     %table.table.table-striped.table-hover{ style: 'width: 700px;'}
       %tr
+        %th No.
         %th User
         %th Name
         %th Souce
         %th Tracks
         %th
 
-      - @playlists.each do |playlist|
+      - @playlists.each.with_index(1) do |playlist, index|
         %tr
+          %td= index + @playlists.offset_value
           %td{ nowrap: true }
             = render partial: '/layouts/user_icon', locals: { user: playlist.user, size: "18x18", klass: "margin_minus2" }
             = '　'
