@@ -5,13 +5,13 @@ class PlaylistsController < ApplicationController
 
   # ----- パブリック：全ユーザ公開 ----- #
   # 新着順
-  def recent
-    @playlists = Playlist.active.order(created_at: :desc)
+  def recent(page)
+    @playlists = Playlist.active.order(created_at: :desc).page(page).per(Settings.per_page)
   end
 
   # 人気順
-  def popular
-    @playlists = Playlist.active.order(view_count: :desc, created_at: :desc)
+  def popular(page)
+    @playlists = Playlist.active.order(view_count: :desc, created_at: :desc).page(page).per(Settings.per_page)
   end
 
   # プレイリスト再生

@@ -2,6 +2,8 @@
   %h2 Recent Playlists
 
   - if @playlists.present?
+    = paginate @playlists, outer_window: 3
+
     %table.table.table-striped.table-hover{ style: 'width: 700px;'}
       %tr
         %th User
@@ -23,3 +25,5 @@
               / = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user_id, playlist.playlist_id) rescue nil
               = link_to playlist.playlist.name, tracks_playlist_path(playlist.playlist_id)
           %td= playlist.track_count
+
+    = paginate @playlists, outer_window: 3
