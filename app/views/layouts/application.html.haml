@@ -22,12 +22,12 @@
             %li= link_to "Recent", recent_playlists_path
             %li= link_to "Popular", popular_playlists_path
             / %li= link_to "Goods", goods_path
-            %li= link_to "Users", users_path
+            / %li= link_to "Users", users_path
             %li= link_to "Sign out", logout_path
           - else
             %li= link_to "Recent", recent_playlists_path
             %li= link_to "Popular", popular_playlists_path
-            %li= link_to "Users", users_path
+            / %li= link_to "Users", users_path
             %li= link_to "Sign in", "/auth/twitter"
     .page_top_margin
       - if flash[:notice].present? or flash[:alert].present?
