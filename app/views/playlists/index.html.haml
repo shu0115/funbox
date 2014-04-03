@@ -8,14 +8,18 @@
   %br
 
   - if @playlists.present?
+    = paginate @playlists, outer_window: 3
+
     %table.table.table-striped.table-hover{ style: 'width: 700px;'}
       %tr
+        %th No.
         %th Name
         %th Souce
         %th
 
-      - @playlists.each do |playlist|
+      - @playlists.each.with_index(1) do |playlist, index|
         %tr
+          %td= index + @playlists.offset_value
           %td{ nowrap: true, style: 'line-height: 30px;' }= link_to playlist.name, playlist_path(playlist)
           %td{ nowrap: true, style: 'line-height: 30px;' }
             - if playlist.playlist.present?
@@ -23,4 +27,6 @@
           %td
             = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary btn-sm'
             = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger btn-sm'
+
+    = paginate @playlists, outer_window: 3
 %br

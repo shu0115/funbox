@@ -27,8 +27,8 @@ class PlaylistsController < ApplicationController
 
   # ----- プライベート：自分のもののみ ----- #
   # GET /playlists
-  def index
-    @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
+  def index(page)
+    @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc).page(page).per(Settings.per_page)
     @playlist  = Playlist.new
   end
 
