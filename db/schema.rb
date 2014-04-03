@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402074528) do
+ActiveRecord::Schema.define(version: 20140403022241) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -85,5 +85,16 @@ ActiveRecord::Schema.define(version: 20140402074528) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "view_counts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "playlist_id"
+    t.date     "footprint_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "view_counts", ["playlist_id"], name: "index_view_counts_on_playlist_id"
+  add_index "view_counts", ["user_id"], name: "index_view_counts_on_user_id"
 
 end

@@ -3,6 +3,7 @@ class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
   skip_before_filter :authenticate, only: [:recent, :popular, :tracks]
 
+  # ----- パブリック：全ユーザ公開 ----- #
   # 新着順
   def recent
     @playlists = Playlist.active.order(created_at: :desc)
@@ -16,11 +17,15 @@ class PlaylistsController < ApplicationController
   # プレイリスト再生
   def tracks(id, shuffle)
     session[:request_url] = tracks_playlist_url(id) if current_user.blank?
+
     @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: id)
     # @unique_ids = @playlist.tracks.pluck(:unique_id)
     @unique_ids = Track.unique_ids(@playlist.tracks, shuffle: shuffle)
+
+    ViewCount.where(user_id: current_user.id, playlist_id: @playlist.id, footprint_date: Date.today).first_or_create if current_user.present?
   end
 
+  # ----- プライベート：自分のもののみ ----- #
   # GET /playlists
   def index
     @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
