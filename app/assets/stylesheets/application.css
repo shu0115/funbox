@@ -29,6 +29,11 @@ table a, .table a{
 
 table td{
   padding: 5px;
+  vertical-align: middle !important;
+}
+
+table th{
+  text-align: center;
 }
 
 .left_margin_10 {
