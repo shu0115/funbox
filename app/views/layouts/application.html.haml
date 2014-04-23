@@ -9,6 +9,7 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
+    = render partial: '/layouts/google_analytics' if Rails.env.production?
   %body{ 'data-no-turbolink' => true }
     .navbar.navbar-default.navbar-fixed-top
       .navbar-header
