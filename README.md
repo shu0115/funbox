@@ -1,6 +1,6 @@
-# APP_NAME
+# Funbox
 
-APP_DESCRIPTION.
+Youtube Playlist Service.
 
 ## Local Setting
 
