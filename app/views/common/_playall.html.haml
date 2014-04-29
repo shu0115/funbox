@@ -1,2 +1,5 @@
 
-%iframe{ width: "854", height: "510", src: "https://www.youtube.com/embed/#{unique_ids.first}?playlist=#{unique_ids.delete_at(0); unique_ids.join(',')}&rel=0&loop=1&autohide=1&autoplay=0&color=white&theme=dark", frameborder: "0", allowfullscreen: true}
+- first_id  = unique_ids.first
+- other_ids = unique_ids[1..(unique_ids.size-1)]
+
+%iframe{ width: "854", height: "510", src: "https://www.youtube.com/embed/#{first_id}?playlist=#{other_ids.join(',')}&rel=0&loop=1&autohide=1&autoplay=0&color=white&theme=dark", frameborder: "0", allowfullscreen: true}
