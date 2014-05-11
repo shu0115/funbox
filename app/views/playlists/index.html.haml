@@ -5,7 +5,7 @@
     = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 600px; float: left;'
     = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
   %br
-  %p= link_to "Play all", all_playlists_path
+  %p= link_to "Play all", all_playlists_path, class: 'btn btn-primary'
   %br
 
   - if @playlists.present?

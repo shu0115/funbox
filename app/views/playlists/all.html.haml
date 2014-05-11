@@ -3,7 +3,7 @@
     Tracks by
     = link_to current_user.name, "#{Settings.twitter_page}#{current_user.name}", target: "_blank"
 
-.container{ style: 'width: 1160px; padding: 0 0 0 0;'}
+.container{ style: 'width: 1000px; padding: 0 0 0 0;'}
   - if @tracks.present?
     .text-center
       = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }

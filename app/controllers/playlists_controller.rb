@@ -64,7 +64,7 @@ class PlaylistsController < ApplicationController
     @playlist.save!
 
     # redirect_to playlists_path and return
-    redirect_to playlist_path(@playlist) and return
+    redirect_to playlist_path(@playlist, search: true) and return
   end
 
   # PUT /playlists/1
