@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403022241) do
+ActiveRecord::Schema.define(version: 20140511064717) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140403022241) do
     t.integer  "view_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hide_top_flag",  default: false
   end
 
   add_index "tracks", ["playlist_id"], name: "index_tracks_on_playlist_id"

@@ -1,5 +1,6 @@
 Funbox::Application.routes.draw do
   root to: 'top#index'
+  delete 'top/hide/:track_id' => 'top#hide', as: :top_hide
 
   resources :goods, only: [:index]
 
