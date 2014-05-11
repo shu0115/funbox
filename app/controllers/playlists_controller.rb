@@ -103,10 +103,13 @@ class PlaylistsController < ApplicationController
   end
 
   # プレイリストプレイオール
-  def all
-    @tracks = Track.where(id: Track.mine(current_user).pluck(:id).shuffle.first(100))
+  def all(checks)
+    tracks = Track.mine(current_user)
+    tracks.where!(playlist_id: checks.values) if checks.present?
+    @tracks = Track.where(id: tracks.pluck(:id).shuffle.first(100))
     @unique_ids   = Track.unique_ids(@tracks, shuffle: true)
     @tracks_hash  = @tracks.index_by{ |x| x.unique_id }
+    @checks = checks
   end
 
   # フォーク

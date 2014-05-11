@@ -35,6 +35,15 @@ $(function(){
 
   // オートページャー
   if ($('#autopager_on').val() == 'true') { autopager(); };
+
+  // プレイリスト全チェック
+  $('#all_check').click(function(){
+    if(this.checked){
+      $(".playlist_check").prop("checked", true);
+    } else {
+      $(".playlist_check").prop("checked", false);
+    }
+  });
 });
 
 // プレイオール更新
