@@ -5,10 +5,11 @@
     = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 600px; float: left;'
     = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
   %br
+  %p= link_to "Play all", all_playlists_path
   %br
 
   - if @playlists.present?
-    = paginate @playlists, outer_window: 3
+    / = paginate @playlists, outer_window: 3
 
     %table.table.table-striped.table-hover{ style: 'width: 700px;'}
       %tr
@@ -19,7 +20,8 @@
 
       - @playlists.each.with_index(1) do |playlist, index|
         %tr
-          %td= index + @playlists.offset_value
+          / %td= index + @playlists.offset_value
+          %td= index
           %td{ nowrap: true, style: 'line-height: 30px;' }= link_to playlist.name, playlist_path(playlist)
           %td{ nowrap: true, style: 'line-height: 30px;' }
             - if playlist.playlist.present?
@@ -28,5 +30,5 @@
             = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary btn-sm'
             = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger btn-sm'
 
-    = paginate @playlists, outer_window: 3
+    / = paginate @playlists, outer_window: 3
 %br

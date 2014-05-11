@@ -4,12 +4,12 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= Settings.app_name
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
     = render partial: '/layouts/google_analytics' if Rails.env.production?
+    = display_meta_tags(default_meta_tags)
   %body{ 'data-no-turbolink' => true }
     = render partial: '/layouts/facebook_like_script'
     .navbar.navbar-default.navbar-fixed-top
@@ -20,7 +20,7 @@
           - if signed_in?
             %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
             %li{ class: (playlists_active?(params) ? 'active' : '') }= link_to "Playlists", playlists_path
-            %li{ class: (play_all_active?(params) ? 'active' : '') }= link_to "Play all", all_playlists_path
+            / %li{ class: (play_all_active?(params) ? 'active' : '') }= link_to "Play all", all_playlists_path
             %li{ class: (recent_active?(params) ? 'active' : '') }= link_to "Recent", recent_playlists_path
             %li{ class: (popular_active?(params) ? 'active' : '') }= link_to "Popular", popular_playlists_path
             / %li= link_to "Goods", goods_path

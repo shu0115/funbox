@@ -14,7 +14,7 @@ class PlaylistsController < ApplicationController
     @playlists = Playlist.active.order(view_count: :desc, created_at: :desc).page(page).per(Settings.per_page)
   end
 
-  # プレイリスト再生
+  # 公開用プレイリスト再生
   def tracks(id, shuffle)
     session[:request_url] = tracks_playlist_url(id) if current_user.blank?
 
@@ -27,8 +27,10 @@ class PlaylistsController < ApplicationController
 
   # ----- プライベート：自分のもののみ ----- #
   # GET /playlists
-  def index(page)
-    @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc).page(page).per(Settings.per_page)
+  # def index(page)
+  def index
+    # @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc).page(page).per(Settings.per_page)
+    @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
     @playlist  = Playlist.new
   end
 

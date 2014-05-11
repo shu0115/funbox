@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.1.1'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
@@ -61,6 +61,7 @@ gem "coderay"
 gem 'youtube_it'
 gem 'ruby-duration'
 gem 'addressable', '2.3.5'
+gem 'meta-tags'
 
 # Design Template
 gem 'therubyracer', platforms: :ruby
