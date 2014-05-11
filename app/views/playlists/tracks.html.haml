@@ -38,6 +38,12 @@
       - else
         - # ログイン
         = link_to 'Sign in', "/auth/twitter", class: 'btn btn-primary'
+
+      - # Facebookシェア
+      = render partial: '/layouts/facebook_share', locals: { playlist: @playlist }
+
+      - # Twitterシェア
+      = render partial: '/layouts/twitter_share', locals: { playlist: @playlist }
     %br
 
 .container{ style: 'width: 1000px; padding: 0 0 0 0;'}

@@ -86,3 +86,34 @@ function autopager() {
     };
   });
 }
+
+// Facebookシェア
+function fb_share(){
+  // パラメータ
+  var app_id      = $('#app_id').val();
+  var title       = $('#title').val();
+  var link        = $('#link').val();
+  var picture     = $('#picture').val();
+  var description = $('#description').val();
+
+  FB.init({
+    appId:  app_id,  // App ID from the app dashboard
+    status: true,    // Check Facebook Login status
+    xfbml:  true     // Look for social plugins on the page
+  });
+  FB.ui({
+    method:      'feed',
+    name:        title,
+    link:        link,
+    picture:     picture,
+    // caption: 'Reference Documentation',
+    description: description
+  },
+  function(response){
+    if (response && response.post_id) {
+      console.log("[ Post was published. ]");
+    } else {
+      console.log("[ Post was not published. ]");
+    }
+  });
+}
