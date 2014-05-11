@@ -4,7 +4,6 @@ class Track < ActiveRecord::Base
 
   # スコープ
   scope :mine, -> (user) { where(tracks: { user_id: user.id }) }
-  scope :not_hide_top, -> { where(tracks: { hide_top_flag: false }) }
 
   # コールバック
   after_create  { |track| track.playlist.update(track_count: ActiveRecord::Base.connection.execute("SELECT COUNT(*) FROM tracks WHERE tracks.playlist_id = #{track.playlist_id}").first.first[1]) }

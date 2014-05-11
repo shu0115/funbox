@@ -13,8 +13,8 @@
         %tr
         - ids.each do |id|
           - track = @tracks_hash[id]
-          %td{ style: 'padding: 5px;' }
+          %td{ style: 'padding: 5px;', id: "top_track_#{track.id}" }
             = render partial: '/common/video_thumbnail', locals: { track: track }
             - if current_user.present? and current_user.admin_flag
-              = link_to "Hide", top_hide_path(track_id: track.id), data: { confirm: "「#{track.title}」をトップから非表示にします。よろしいですか？", method: 'delete' }, class: 'btn btn-danger btn-xs'
+              = link_to "Hide", top_hide_path(track_id: track.id), remote: true, data: { update_target: "top_track_#{track.id}", confirm: "「#{track.id} : #{track.title}」をトップから非表示にします。よろしいですか？", method: 'delete' }, class: 'btn btn-danger btn-xs'
 %br
