@@ -11,7 +11,7 @@ module ApplicationHelper
         type:        'website',
         description: 'Youtube Playlist Service',
         url:         'https://funbox.herokuapp.com/',
-        image:       asset_url('logo_180.png'),
+        image:       asset_url('logo_200.png'),
         site_name:   'Funbox',
         locale:      'ja_JP',
       },
