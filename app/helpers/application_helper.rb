@@ -14,6 +14,9 @@ module ApplicationHelper
         image:       asset_url('logo_180.png'),
         site_name:   'Funbox',
         locale:      'ja_JP',
+      },
+      fb: {
+        admins: '100001953871118'
       }
     }
   end
