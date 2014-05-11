@@ -12,7 +12,7 @@
     = ','
     = link_to (image_tag 'amazon.png', width: 63, height: 18), "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=カタカナ&url=search-alias%3Daps&field-keywords=#{@playlist.name}&at=#{Settings.amazon_affiliate_id}", target: '_blank'
 
-.container{ style: 'width: 1160px; padding: 0 0 0 0;'}
+.container{ style: 'width: 1000px; padding: 0 0 0 0;'}
   - # Play All
   #tracks
     = render partial: '/playlists/tracks', locals: { playlist: @playlist, tracks: @tracks, unique_ids: Track.unique_ids(@tracks, shuffle: params[:shuffle]) }
