@@ -11,9 +11,7 @@
     = render partial: '/layouts/google_analytics' if Rails.env.production?
     = display_meta_tags(default_meta_tags)
   %body{ 'data-no-turbolink' => true }
-    = render partial: '/layouts/facebook_like_script'
-    / %div{ id: "fb-root" }
-    / %script{ src: "http://connect.facebook.net/ja_JP/all.js" }
+    = render partial: '/layouts/facebook_script'
     .navbar.navbar-default.navbar-fixed-top
       .navbar-header
         = link_to Settings.app_name, :root, class: 'navbar-brand title_logo'
