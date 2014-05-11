@@ -6,8 +6,12 @@
   - if @tracks.present?
     .text-center
       = render partial: '/common/playall', locals: { tracks: @tracks, unique_ids: @unique_ids }
-    %br
-    %br
+      %br
+      - if current_user.blank?
+        %br
+        %p= link_to "Sign in", "/auth/twitter", class: 'btn btn-primary'
+      %br
+
     %table
       - @unique_ids.each_slice(4) do |ids|
         %tr

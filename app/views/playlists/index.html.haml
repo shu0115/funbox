@@ -7,11 +7,11 @@
   %br
   / %p= link_to "Check Play", all_playlists_path, class: 'btn btn-primary'
 
-  = form_tag all_playlists_path, method: 'get' do
-    = submit_tag 'Check Play', class: 'btn btn-primary'
-    %br
-    %br
-    - if @playlists.present?
+  - if @playlists.present?
+    = form_tag all_playlists_path, method: 'get' do
+      = submit_tag 'Check Play', class: 'btn btn-primary'
+      %br
+      %br
       / = paginate @playlists, outer_window: 3
 
       %table.table.table-striped.table-hover{ style: 'width: 700px;'}
