@@ -1,3 +1,6 @@
+- # 作成者用プレイリストページ
+
+- # プレイリスト情報エリア
 .container{ style: 'width: 900px'}
   %h2= link_to @playlist.name, playlist_path(@playlist)
 
@@ -12,6 +15,7 @@
     = ','
     = link_to (image_tag 'amazon.png', width: 63, height: 18), "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=カタカナ&url=search-alias%3Daps&field-keywords=#{@playlist.name}&at=#{Settings.amazon_affiliate_id}", target: '_blank'
 
+- # 動画再生エリア
 .container{ style: 'width: 1000px; padding: 0 0 0 0;'}
   - # Play All
   #tracks
@@ -19,6 +23,7 @@
 %br
 %br
 
+- # Youtube検索
 .container{ style: 'width: 700px;' }
   - # 検索フォーム
   = form_tag search_playlist_path(id: @playlist.id, word: @word), method: :get, remote: :true, data: { update_target: 'search_result_area' } do
@@ -27,6 +32,7 @@
 
 %br
 
+- # Youtube検索結果表示エリア
 .container{ style: 'width: 700px;'}
   - # 検索結果
   #search_result_area

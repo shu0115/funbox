@@ -1,7 +1,8 @@
 class PlaylistsController < ApplicationController
   permits :user, :name, :playlist
+  skip_before_filter :authenticate, only: [:show, :recent, :popular, :tracks]
+  before_action :redirect_public, only: [:show]
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
-  skip_before_filter :authenticate, only: [:recent, :popular, :tracks]
 
   # ----- パブリック：全ユーザ公開 ----- #
   # 新着順
@@ -127,6 +128,15 @@ class PlaylistsController < ApplicationController
   end
 
   private
+
+  # プレイリスト所有者以外、もしくは未ログインの場合はpublic用URLへ飛ばす
+  def redirect_public
+    playlist = Playlist.find_by(id: params[:id])
+
+    if playlist.present? and (current_user.blank? or !playlist.mine?(current_user))
+      redirect_to tracks_playlist_path(playlist) and return
+    end
+  end
 
   # プレイリスト取得
   def set_playlist

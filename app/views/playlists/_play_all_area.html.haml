@@ -3,5 +3,14 @@
   = render partial: '/common/playall', locals: { tracks: tracks, unique_ids: unique_ids }
   %br
   %br
-  %p= link_to 'Shuffle', playlist_path(playlist, shuffle: true), class: 'btn btn-primary'
+  %p
+    = link_to 'Shuffle', playlist_path(playlist, shuffle: true), class: 'btn btn-primary'
+
+    - # Facebookシェア
+    = render partial: '/layouts/facebook_share', locals: { playlist: playlist }
+
+    - # Twitterシェア
+    = render partial: '/layouts/twitter_share', locals: { playlist: playlist }
+
+    = link_to 'Public', tracks_playlist_path(playlist), class: 'btn btn-primary'
   %br

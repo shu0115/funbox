@@ -1,3 +1,5 @@
+- # 公開用プレイリストページ
+
 - title [Settings.app_name, @playlist.name]
 - description @playlist.tracks.first.try(:description)
 - keywords @playlist.tracks.pluck(:title)
@@ -44,6 +46,10 @@
 
       - # Twitterシェア
       = render partial: '/layouts/twitter_share', locals: { playlist: @playlist }
+
+      - # 作成者用プレイリストページへのリンク
+      - if @playlist.mine?(current_user)
+        = link_to 'Edit', playlist_path(@playlist), class: 'btn btn-primary'
     %br
 
 .container{ style: 'width: 1000px; padding: 0 0 0 0;'}
