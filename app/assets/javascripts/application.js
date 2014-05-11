@@ -90,17 +90,21 @@ function autopager() {
 // Facebookシェア
 function fb_share(){
   // パラメータ
-  var app_id      = $('#app_id').val();
-  var title       = $('#title').val();
-  var link        = $('#link').val();
-  var picture     = $('#picture').val();
-  var description = $('#description').val();
+  // var app_id       = $('#facebook_app_id').val();
+  var title        = $('#title').val();
+  var link         = $('#link').val();
+  var picture      = $('#picture').val();
+  var description  = $('#description').val();
+  // var redirect_uri = $('#redirect_uri').val();
+  // console.log("[ app_id ] : " + app_id);
 
-  FB.init({
-    appId:  app_id,  // App ID from the app dashboard
-    status: true,    // Check Facebook Login status
-    xfbml:  true     // Look for social plugins on the page
-  });
+  // FB.init({
+  //   app_id:  app_id,  // App ID from the app dashboard
+  //   status: true,    // Check Facebook Login status
+  //   show_error: true,
+  //   redirect_uri: redirect_uri,
+  //   xfbml:  true     // Look for social plugins on the page
+  // });
   FB.ui({
     method:      'feed',
     name:        title,

@@ -1,8 +1,9 @@
-= hidden_field_tag :app_id,      Settings.facebook_app_id
+= hidden_field_tag :facebook_app_id,      Settings.facebook_app_id
 = hidden_field_tag :title,       "#{Settings.app_name} | #{playlist.name}"
 = hidden_field_tag :link,        tracks_playlist_url(playlist)
 = hidden_field_tag :picture,     playlist.tracks.first.try(:thumbnail_url)
 = hidden_field_tag :description, playlist.tracks.first.try(:description)
+= hidden_field_tag :redirect_uri, request.url
 
 %a{ onclick: "fb_share()" }
   %button{ class: 'btn btn-primary' }

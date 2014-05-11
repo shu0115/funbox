@@ -36,7 +36,7 @@ class PlaylistsController < ApplicationController
   end
 
   # GET /playlists/1
-  def show(id, word, page, search: true)
+  def show(id, word, page, search: false)
     # @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
     @tracks     = @playlist.tracks
     @unique_ids = @tracks.pluck(:unique_id)
