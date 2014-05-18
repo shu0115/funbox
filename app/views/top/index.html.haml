@@ -11,6 +11,8 @@
         %br
         %p= link_to "Sign in", "/auth/twitter", class: 'btn btn-primary'
       %br
+      = render partial: '/layouts/facebook_like'
+      %br
 
     %table
       - @unique_ids.each_slice(4) do |ids|
