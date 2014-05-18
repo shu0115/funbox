@@ -43,8 +43,10 @@ class Track < ActiveRecord::Base
 
     # ランダム抽出
     def random_tracks(limit)
-      ids = Track.pluck(:id)
-      return Track.where(id: ids.shuffle.first(limit))
+      # ids = Track.pluck(:id)
+      # return Track.where(id: ids.shuffle.first(limit))
+      unique_ids = Track.pluck(:unique_id).uniq
+      return Track.where(unique_id: unique_ids.shuffle.first(limit))
     end
   end
 end
