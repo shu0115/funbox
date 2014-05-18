@@ -25,6 +25,7 @@
 
 table a, .table a{
   text-decoration: none;
+  color: #888888;
 }
 
 table td{
@@ -56,4 +57,17 @@ table th{
 
 .navbar-default .navbar-brand {
   color: #2a9fd6;
+}
+
+.gray {
+  color: #888888;
+}
+
+.track_list_title {
+  width:         230px;
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 }

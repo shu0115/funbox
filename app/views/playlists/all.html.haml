@@ -16,5 +16,6 @@
         - ids.each do |id|
           - track = @tracks_hash[id]
           %td{ style: 'padding: 5px;' }
+            %track_list_title= link_to_if track.playlist.try(:name).present?, track.playlist.try(:name), playlist_path(track.playlist.id), target: '_blank'
             = render partial: '/common/video_thumbnail', locals: { track: track }
 %br

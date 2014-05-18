@@ -62,6 +62,7 @@ gem 'youtube_it'
 gem 'ruby-duration'
 gem 'addressable', '2.3.5'
 gem 'meta-tags'
+gem 'unicode-display_width'
 
 # Design Template
 gem 'therubyracer', platforms: :ruby

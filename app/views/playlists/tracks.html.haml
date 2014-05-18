@@ -62,6 +62,7 @@
         - ids.each do |id|
           - track = tracks_hash[id]
           %td{ style: 'padding: 5px;' }
+            %div.gray.track_list_title= track.title
             = render partial: '/common/video_thumbnail', locals: { track: track }
 %br
 %br
