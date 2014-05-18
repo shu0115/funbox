@@ -1,5 +1,10 @@
 - # 作成者用プレイリストページ
 
+- title [Settings.app_name, @playlist.name]
+- description @playlist.tracks.first.try(:description)
+- keywords @playlist.tracks.pluck(:title)
+- set_meta_tags og: { title: [Settings.app_name, @playlist.name].join(' | '), description: @playlist.tracks.first.try(:description), url: request.url, image: @playlist.tracks.first.try(:thumbnail_url) }
+
 - # プレイリスト情報エリア
 .container{ style: 'width: 900px'}
   %h2= link_to @playlist.name, playlist_path(@playlist)
