@@ -23,7 +23,8 @@ class PlaylistsController < ApplicationController
     # @unique_ids = @playlist.tracks.pluck(:unique_id)
     @unique_ids = Track.unique_ids(@playlist.tracks, shuffle: shuffle)
 
-    ViewCount.where(user_id: current_user.id, playlist_id: @playlist.id, footprint_date: Date.today).first_or_create if current_user.present?
+    # ビューカウント
+    ViewCount.add_daily_count(playlist: @playlist, user: current_user)
   end
 
   # ----- プライベート：自分のもののみ ----- #
