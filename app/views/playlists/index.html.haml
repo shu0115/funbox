@@ -1,11 +1,18 @@
 .container{ style: 'width: 700px'}
   %h2 Playlists
 
+  - # プレイリスト追加
   = form_for @playlist do |f|
     = f.text_field :name, class: 'form-control', placeholder: 'Playlist Name', style: 'width: 600px; float: left;'
     = f.submit 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary left_margin_10'
   %br
-  / %p= link_to "Check Play", all_playlists_path, class: 'btn btn-primary'
+
+  - # プレイリスト検索
+  = form_tag playlists_path, method: :get  do |f|
+    = text_field_tag 'search[word]', @search[:word], class: 'form-control', placeholder: 'Search Word', style: 'width: 300px; float: left;'
+    = submit_tag 'Search', data: { disable_with: 'Search' }, class: 'btn btn-primary left_margin_10'
+    = link_to 'Clear', playlists_path, class: 'btn btn-primary left_margin_10'
+  %br
 
   - if @playlists.present?
     = form_tag all_playlists_path, method: 'get' do

@@ -28,12 +28,16 @@ class PlaylistsController < ApplicationController
   end
 
   # ----- プライベート：自分のもののみ ----- #
-  # GET /playlists
-  # def index(page)
-  def index
-    # @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc).page(page).per(Settings.per_page)
+  def index(search: {})
     @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
+
+    if search.present?
+      @playlists = @playlists.where.like(name: "%#{search[:word]}%")
+    end
+
     @playlist  = Playlist.new
+
+    @search = search
   end
 
   # GET /playlists/1
