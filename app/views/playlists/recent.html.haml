@@ -17,7 +17,7 @@
       - @playlists.each.with_index(1) do |playlist, index|
         %tr
           %td= index + @playlists.offset_value
-          %td= link_to image_tag(playlist.tracks.first.thumbnail_url, height: 50), tracks_playlist_path(playlist)
+          %td= link_to image_tag(playlist.tracks.first.thumbnail_url, height: 50), tracks_playlist_path(playlist) if playlist.tracks.first.present?
           %td{ nowrap: true }
             = render partial: '/layouts/user_icon', locals: { user: playlist.user, size: "18x18", klass: "margin_minus2" }
             = '　'
