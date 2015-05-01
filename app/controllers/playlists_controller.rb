@@ -6,17 +6,17 @@ class PlaylistsController < ApplicationController
 
   # ----- パブリック：全ユーザ公開 ----- #
   # 新着順
-  def recent(page)
+  def recent(page: 1)
     @playlists = Playlist.active.order(created_at: :desc).page(page).per(Settings.per_page)
   end
 
   # 人気順
-  def popular(page)
+  def popular(page: 1)
     @playlists = Playlist.active.order(view_count: :desc, created_at: :desc).page(page).per(Settings.per_page)
   end
 
   # 公開用プレイリスト再生
-  def tracks(id, shuffle)
+  def tracks(id, shuffle: false)
     session[:request_url] = tracks_playlist_url(id) if current_user.blank?
 
     @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: id)
@@ -41,7 +41,7 @@ class PlaylistsController < ApplicationController
   end
 
   # GET /playlists/1
-  def show(id, word, page, search: false)
+  def show(id, word: '', page: 1, search: false)
     # @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
     @tracks     = @playlist.tracks
     @unique_ids = @tracks.pluck(:unique_id)
@@ -92,7 +92,7 @@ class PlaylistsController < ApplicationController
   end
 
   # Youtube検索
-  def search(id, word, page)
+  def search(id, word: '', page: 1)
     unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
     videos = Track.youtube_search(word, unique_ids, page)
 
@@ -100,7 +100,7 @@ class PlaylistsController < ApplicationController
   end
 
   # Youtube検索オートページャー
-  def search_pager(id, word, page)
+  def search_pager(id, word: '', page: 1)
     unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
     videos = Track.youtube_search(word, unique_ids, page)
 

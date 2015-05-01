@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140511064717) do
 
-  create_table "authentications", force: true do |t|
+  create_table "authentications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140511064717) do
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id"
 
-  create_table "goods", force: true do |t|
+  create_table "goods", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "playlist_id"
     t.datetime "created_at"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140511064717) do
   add_index "goods", ["playlist_id"], name: "index_goods_on_playlist_id"
   add_index "goods", ["user_id"], name: "index_goods_on_user_id"
 
-  create_table "playlists", force: true do |t|
+  create_table "playlists", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.integer  "playlist_id"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20140511064717) do
   add_index "playlists", ["playlist_id"], name: "index_playlists_on_playlist_id"
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
 
-  create_table "tracks", force: true do |t|
+  create_table "tracks", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "playlist_id"
     t.integer  "number"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20140511064717) do
   add_index "tracks", ["playlist_id"], name: "index_tracks_on_playlist_id"
   add_index "tracks", ["user_id"], name: "index_tracks_on_user_id"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "image"
     t.string   "email"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20140511064717) do
     t.datetime "updated_at"
   end
 
-  create_table "view_counts", force: true do |t|
+  create_table "view_counts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "playlist_id"
     t.date     "footprint_date"
