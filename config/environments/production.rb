@@ -78,4 +78,24 @@ Funbox::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # メールテスト用
+  config.action_mailer.delivery_method       = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings         = {
+    address:              "smtp.gmail.com",
+    port:                 587,
+    user_name:            "rails.dev0115@gmail.com",
+    password:             Settings.mail_password,
+    authentication:       'plain',
+    enable_starttls_auto: true,
+  }
+
+  # 例外エラー通知
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    email: {
+      email_prefix:         "[#{Rails.env}][#{Settings.app_name}] ",
+      sender_address:       %{"ExceptionNotification" <rails.dev0115@gmail.com>},
+      exception_recipients: %w{rails.dev0115@gmail.com s.matsumoto0115@gmail.com}
+    }
 end
