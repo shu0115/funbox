@@ -15,3 +15,5 @@ facebook_app_id: '1443747899201804'
 
 # Gmail Pass
 mail_password: <%= ENV['MAIL_PASSWORD'] %>
+
+secret_key_base: <%= ENV['SECRET_KEY_BASE'] %>
