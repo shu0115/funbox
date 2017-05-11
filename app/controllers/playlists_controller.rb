@@ -1,6 +1,6 @@
 class PlaylistsController < ApplicationController
   permits :user, :name, :playlist
-  skip_before_filter :authenticate, only: [:show, :recent, :popular, :tracks]
+  skip_before_action :authenticate, only: [:show, :recent, :popular, :tracks]
   before_action :redirect_public, only: [:show]
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
 

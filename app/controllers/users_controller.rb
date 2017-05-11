@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate
+  skip_before_action :authenticate
 
   # # ユーザ一覧
   # def index(page)
