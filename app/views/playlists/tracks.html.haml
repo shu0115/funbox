@@ -16,8 +16,7 @@
       = ", From"
       = link_to @playlist.playlist.name, tracks_playlist_path(@playlist.playlist_id)
 
-    = ','
-    = link_to (image_tag 'amazon.png', width: 63, height: 18), "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=カタカナ&url=search-alias%3Daps&field-keywords=#{@playlist.name}&at=#{Settings.amazon_affiliate_id}", target: '_blank'
+    = render partial: '/layouts/amazon_link', locals: { playlist: @playlist }
 
   - # Play All
   .text-center
@@ -40,12 +39,6 @@
       - else
         - # ログイン
         = link_to 'Sign in', "/auth/twitter", class: 'btn btn-primary'
-
-      - # Facebookシェア
-      = render partial: '/layouts/facebook_share', locals: { playlist: @playlist }
-
-      - # Twitterシェア
-      = render partial: '/layouts/twitter_share', locals: { playlist: @playlist }
 
       - # 作成者用プレイリストページへのリンク
       - if @playlist.mine?(current_user)

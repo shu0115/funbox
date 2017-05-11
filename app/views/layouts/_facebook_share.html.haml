@@ -1,8 +1,0 @@
-= hidden_field_tag :title,       "#{Settings.app_name} | #{playlist.name}"
-= hidden_field_tag :link,        tracks_playlist_url(playlist)
-= hidden_field_tag :picture,     playlist.tracks.first.try(:thumbnail_url)
-= hidden_field_tag :description, playlist.tracks.first.try(:description)
-
-%a{ onclick: "fb_share()" }
-  %button{ class: 'btn btn-primary' }
-    Share on Facebook

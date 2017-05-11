@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   has_many :tracks
   has_many :goods
 
+  def https_image
+    self.image.gsub('http://', 'https://')
+  end
+
   private
 
   # ユーザ作成

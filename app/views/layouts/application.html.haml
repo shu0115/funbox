@@ -11,7 +11,6 @@
     = render partial: '/layouts/google_analytics' if Rails.env.production?
     = display_meta_tags(default_meta_tags)
   %body
-    = render partial: '/layouts/facebook_script'
     .navbar.navbar-default.navbar-fixed-top
       .navbar-header
         = link_to Settings.app_name, :root, class: 'navbar-brand title_logo'
@@ -41,15 +40,12 @@
     %br/
     %br/
     .text-center
-      %p= render partial: '/layouts/facebook_like'
       %br/
-      %br
-      %p= render partial: '/layouts/amazon_affiliate'
       %br
       %p
         Developed by
-        %a{ href: "https://twitter.com/#{Settings.programmer_twitter_id}/", target: "_blank" }
-          @#{Settings.programmer_twitter_id}
+        %a{ href: "https://github.com/shu0115", target: "_blank" }
+          @shu0115
     %br/
     %br/
     %br/
