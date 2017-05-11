@@ -1,6 +1,6 @@
 class Playlist < ActiveRecord::Base
   belongs_to :user
-  belongs_to :playlist
+  belongs_to :playlist, optional: true
   has_many   :tracks, dependent: :destroy
   has_many   :goods
 
