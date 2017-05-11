@@ -16,7 +16,8 @@
 //= require cyborg/loader
 //= require cyborg/bootswatch
 
-$(function(){
+// $(function(){
+document.addEventListener("turbolinks:load", function() {
   // リモートリンク
   $(document).on('ajax:success', 'a[data-update-target]', function(evt, data) {
     var target = $(this).data('update-target');
@@ -33,8 +34,8 @@ $(function(){
   $('a[rel=tooltip]').tooltip();
   $('a[rel=popover]').popover({ html: true, placement: 'top', trigger: 'hover' });
 
-  // オートページャー
-  if ($('#autopager_on').val() == 'true') { autopager(); };
+  // // オートページャー
+  // if ($('#autopager_on').val() == 'true') { autopager(); };
 
   // プレイリスト全チェック
   $('#all_check').click(function(){
@@ -46,77 +47,83 @@ $(function(){
   });
 });
 
-// プレイオール更新
-function refresh_track_list(playlist_id) {
-  $.get(
-    // 送信先
-    "/playlists/" + playlist_id + "/track",
-    // 送信データ
-    null,
-    // コールバック
-    function(data, status) {
-      $('#play_all_area').html(data);
-    },
-    // 応答データ形式
-    "html"
-  );
-};
+// // プレイオール更新
+// function refresh_track_list(playlist_id) {
+//   $.get(
+//     // 送信先
+//     "/playlists/" + playlist_id + "/track",
+//     // 送信データ
+//     null,
+//     // コールバック
+//     function(data, status) {
+//       $('#play_all_area').html(data);
+//     },
+//     // 応答データ形式
+//     "html"
+//   );
+// };
 
-// オートページャー
-function autopager() {
-  $(window).scroll(function() {
-    var obj = $(this);
-    var current = $(window).scrollTop() + window.innerHeight;
-    if (current < $(document).height() - 400) return; // 下部に達していなければリターン
-    if (obj.data('loading')) { return };  // ロード中であればリターン
+// // オートページャー
+// function autopager() {
+//   $(window).scroll(function() {
+//     var obj = $(this);
+//     var current = $(window).scrollTop() + window.innerHeight;
 
-    // パラメータ
-    var page          = parseInt($('#current_page').val());
-    var next_page     = page + 1
-    var total_page    = parseInt($('#num_pages').val());
-    var playlist_id   = $('#playlist_id').val();
-    var word          = $('#word').val();
+//     if (current < $(document).height() - 400) return; // 下部に達していなければリターン
+//     if (obj.data('loading')) { return };  // ロード中であればリターン
 
-    if (page < total_page) {
-      obj.data('loading', true);  // ローディングフラグON
-      $("#search_result_area_loading").show()
-      $.get(
-        "/playlists/" + playlist_id + "/search_pager",
-        // 送信データ
-        { 'page': next_page, 'word': word },
-        function(data, status) {
-          $("#search_result_area_loading").hide();
-          $('#page_' + page).after(data);  // データ追加
-          $('#current_page').val(next_page);
-          obj.data('loading', false);      // ローディング解除
-        },
-        "html"                             // 応答データ形式
-      );
-    };
-  });
-}
+//     // パラメータ
+//     var page          = parseInt($('#current_page').val());
+//     var next_page     = page + 1
+//     var total_page    = parseInt($('#num_pages').val());
+//     var playlist_id   = $('#playlist_id').val();
+//     var word          = $('#word').val();
 
-// Facebookシェア
-function fb_share(){
-  // パラメータ
-  var title        = $('#title').val();
-  var link         = $('#link').val();
-  var picture      = $('#picture').val();
-  var description  = $('#description').val();
+//     console.log('[page]')
+//     console.log(page)
+//     console.log('[total_page]')
+//     console.log(total_page)
 
-  FB.ui({
-    method:      'feed',
-    name:        title,
-    link:        link,
-    picture:     picture,
-    // caption: 'Reference Documentation',
-    description: description
-  },
-  function(response){
-    if (response && response.post_id) {
-      console.log("[ Post was published. ]");
-    } else {
-      console.log("[ Post was not published. ]");
-    }
-  });
-}
+//     if (page < total_page) {
+//       obj.data('loading', true);  // ローディングフラグON
+//       $("#search_result_area_loading").show()
+//       $.get(
+//         "/playlists/" + playlist_id + "/search_pager",
+//         // 送信データ
+//         { 'page': next_page, 'word': word },
+//         function(data, status) {
+//           $("#search_result_area_loading").hide();
+//           $('#page_' + page).after(data);  // データ追加
+//           $('#current_page').val(next_page);
+//           obj.data('loading', false);      // ローディング解除
+//         },
+//         "html"                             // 応答データ形式
+//       );
+//     };
+//   });
+// }
+
+// // Facebookシェア
+// function fb_share(){
+//   // パラメータ
+//   var title        = $('#title').val();
+//   var link         = $('#link').val();
+//   var picture      = $('#picture').val();
+//   var description  = $('#description').val();
+
+//   FB.ui({
+//     method:      'feed',
+//     name:        title,
+//     link:        link,
+//     picture:     picture,
+//     // caption: 'Reference Documentation',
+//     description: description
+//   },
+//   function(response){
+//     if (response && response.post_id) {
+//       console.log("[ Post was published. ]");
+//     } else {
+//       console.log("[ Post was not published. ]");
+//     }
+//   });
+// }

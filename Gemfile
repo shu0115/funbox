@@ -1,20 +1,20 @@
 source 'https://rubygems.org'
-ruby '2.3.4'
+ruby '2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '5.1.0'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -23,14 +23,28 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.0.5'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Use ActiveModel has_secure_password
@@ -45,24 +59,26 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem "minimum-omniauth-scaffold"
-gem "action_args"
-gem "html5_validators"
-gem "puma"
-gem "kaminari"
-gem "rails_config"
+gem 'minimum-omniauth-scaffold'
+gem 'action_args'
+gem 'html5_validators'
+gem 'puma'
+gem 'kaminari'
+gem 'rails_config'
 gem 'tapp-awesome_print'
-gem "i18n_generators"
-gem "exception_notification"
-gem "haml-rails"
-gem "redcarpet"
-gem "coderay"
-gem 'youtube_it'
+# gem 'i18n_generators'
+gem 'exception_notification'
+# gem 'haml-rails'
+gem 'faml'
+gem 'redcarpet'
+gem 'coderay'
+# gem 'youtube_it'
+gem 'yt'
 gem 'ruby-duration'
 gem 'addressable', '2.3.5'
 gem 'meta-tags'
 gem 'unicode-display_width'
-gem 'everywhere'
+# gem 'everywhere'
 
 # Design Template
 gem 'therubyracer', platforms: :ruby
@@ -71,26 +87,26 @@ gem 'twitter-bootswatch-rails-fontawesome'
 gem 'twitter-bootswatch-rails-helpers'
 
 group :development do
-  gem "pry-rails"
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "erb2haml"
-  gem "quiet_assets"
-  gem "colorize_unpermitted_parameters"
-  gem "rails-flog-disable-sql-format", require: "flog"
-  gem "bullet"
+  gem 'pry-rails'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
+  # gem 'erb2haml'
+  # gem 'quiet_assets'
+  gem 'colorize_unpermitted_parameters'
+  # gem 'rails-flog-disable-sql-format', require: 'flog'
+  gem 'bullet'
 end
 
 group :development, :test do
-  gem "sqlite3"
-  gem "rspec-rails"
+  gem 'sqlite3'
+  gem 'rspec-rails'
 end
 
 group :production do
-  gem "rails_12factor"
-  gem "pg"
-  gem "newrelic_rpm"
-  gem "bounscale"
-  gem "bugsnag"
-  gem "appsignal"
+  gem 'rails_12factor'
+  gem 'pg'
+  gem 'newrelic_rpm'
+  gem 'bounscale'
+  gem 'bugsnag'
+  gem 'appsignal'
 end

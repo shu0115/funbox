@@ -1,33 +1,33 @@
-- if v.present?
-  .add_videos_margin
-    .text-center
-      %iframe{ width: "427", height: "255", src: "https://www.youtube.com/embed/#{v.unique_id}", frameborder: "0", allowfullscreen: true}
-    %br
-    = "#{v.author.name}"
-    = "#{Duration.new(v.duration).format('%H:%M:%S')}"
-    = "#{v.description}"
-    = "#{v.title}"
-    = "#{v.unique_id}"
-    = "#{v.published_at}"
-    = "#{v.favorite_count}"
-    = "#{v.view_count}"
-    %br
-    .text-right
-      = form_tag playlist_track_index_path(playlist_id: playlist.id, word: word), remote: true, data: { 'update-target' => "add_video_#{v.unique_id}" } do
-        = hidden_field_tag 'video[author_name]', v.author.name
-        = hidden_field_tag 'video[duration]', v.duration
-        = hidden_field_tag 'video[description]', v.description
-        = hidden_field_tag 'video[title]', v.title
-        = hidden_field_tag 'video[unique_id]', v.unique_id
-        = hidden_field_tag 'video[published_at]', v.published_at
-        = hidden_field_tag 'video[favorite_count]', v.favorite_count
-        = hidden_field_tag 'video[view_count]', v.view_count
-        = hidden_field_tag 'video[player_url]', v.player_url
-        = submit_tag 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary top_margin_10'
-    %br
-- else
-  - # プレイリストの更新
-  :javascript
-    $(function() {
-      refresh_track_list(#{playlist.id});
-    });
+-# - if v.present?
+-#   .add_videos_margin
+-#     .text-center
+-#       %iframe{ width: "427", height: "255", src: "https://www.youtube.com/embed/#{v.id}", frameborder: "0", allowfullscreen: true}
+-#     %br
+-#     -# = "#{v.author.name}"
+-#     = "#{Duration.new(v.duration).format('%H:%M:%S')}"
+-#     = "#{v.description}"
+-#     = "#{v.title}"
+-#     = "#{v.id}"
+-#     = "#{v.published_at.strftime('%Y/%m/%d %H:%M:%S')}"
+-#     = "#{v.favorite_count}"
+-#     = "#{v.view_count}"
+-#     %br
+-#     .text-right
+-#       = form_tag playlist_track_index_path(playlist_id: playlist.id, word: word), remote: true, data: { 'update-target' => "add_video_#{v.id}" } do
+-#         -# = hidden_field_tag 'video[author_name]', v.author.name
+-#         = hidden_field_tag 'video[duration]', v.duration
+-#         = hidden_field_tag 'video[description]', v.description
+-#         = hidden_field_tag 'video[title]', v.title
+-#         = hidden_field_tag 'video[unique_id]', v.id
+-#         = hidden_field_tag 'video[published_at]', v.published_at
+-#         = hidden_field_tag 'video[favorite_count]', v.favorite_count
+-#         = hidden_field_tag 'video[view_count]', v.view_count
+-#         = hidden_field_tag 'video[player_url]', v.embed_html
+-#         = submit_tag 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary top_margin_10'
+-#     %br
+-# - else
+-#   - # プレイリストの更新
+-#   :javascript
+-#     $(function() {
+-#       refresh_track_list(#{playlist.id});
+-#     });

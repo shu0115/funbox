@@ -21,11 +21,13 @@ class Track < ActiveRecord::Base
     def youtube_search(word, unique_ids, page)
       if word.present?
         # YouTube検索
-        client = YouTubeIt::Client.new
-        videos = client.videos_by(query: word, order_by: 'viewCount', max_results: 50).videos
+        videos = Yt::Collections::Videos.new
+        videos = videos.where(q: "#{word}", order: 'viewCount').first(50)
+
         # プレイリスト登録済み動画除外
-        videos.delete_if{ |v| unique_ids.index(v.unique_id) }
-        videos = Kaminari.paginate_array(videos).page(page).per(Settings.per_page)
+        videos.delete_if{ |v| unique_ids.include?(v.id) } if unique_ids.present?
+
+        # videos = Kaminari.paginate_array(videos).page(page).per(Settings.per_page)
       else
         videos = []
       end
@@ -43,8 +45,6 @@ class Track < ActiveRecord::Base
 
     # ランダム抽出
     def random_tracks(limit)
-      # ids = Track.pluck(:id)
-      # return Track.where(id: ids.shuffle.first(limit))
       unique_ids = Track.pluck(:unique_id).uniq
       return Track.where(unique_id: unique_ids.shuffle.first(limit))
     end

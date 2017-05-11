@@ -1,38 +1,40 @@
 class PlaylistsController < ApplicationController
   permits :user, :name, :playlist
-  skip_before_filter :authenticate, only: [:show, :recent, :popular, :tracks]
+
+  skip_before_action :authenticate, only: [:show, :recent, :popular, :tracks]
   before_action :redirect_public, only: [:show]
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
 
-  # ----- パブリック：全ユーザ公開 ----- #
-  # 新着順
-  def recent(page: 1)
-    @playlists = Playlist.active.order(created_at: :desc).page(page).per(Settings.per_page)
-  end
+  # # ----- パブリック：全ユーザ公開 ----- #
+  # # 新着順
+  # def recent(page: 1)
+  #   @playlists = Playlist.active.order(created_at: :desc).page(page).per(Settings.per_page)
+  # end
 
-  # 人気順
-  def popular(page: 1)
-    @playlists = Playlist.active.order(view_count: :desc, created_at: :desc).page(page).per(Settings.per_page)
-  end
+  # # 人気順
+  # def popular(page: 1)
+  #   @playlists = Playlist.active.order(view_count: :desc, created_at: :desc).page(page).per(Settings.per_page)
+  # end
 
-  # 公開用プレイリスト再生
-  def tracks(id, shuffle: false)
-    session[:request_url] = tracks_playlist_url(id) if current_user.blank?
+  # # 公開用プレイリスト再生
+  # def tracks(id, shuffle: false)
+  #   session[:request_url] = tracks_playlist_url(id) if current_user.blank?
 
-    @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: id)
-    # @unique_ids = @playlist.tracks.pluck(:unique_id)
-    @unique_ids = Track.unique_ids(@playlist.tracks, shuffle: shuffle)
+  #   @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: id)
+  #   # @unique_ids = @playlist.tracks.pluck(:unique_id)
+  #   @unique_ids = Track.unique_ids(@playlist.tracks, shuffle: shuffle)
 
-    # ビューカウント
-    ViewCount.add_daily_count(playlist: @playlist, user: current_user)
-  end
+  #   # ビューカウント
+  #   ViewCount.add_daily_count(playlist: @playlist, user: current_user)
+  # end
 
   # ----- プライベート：自分のもののみ ----- #
   def index(search: {})
     @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
 
     if search.present?
-      @playlists = @playlists.where.like(name: "%#{search[:word]}%")
+      # @playlists = @playlists.where.like(name: "%#{search[:word]}%")
+      @playlists.where!(Playlist.arel_table[:name].matches("%#{search[:word]}%"))
     end
 
     @playlist  = Playlist.new
@@ -42,7 +44,6 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/1
   def show(id, word: '', page: 1, search: false)
-    # @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find(id)
     @tracks     = @playlist.tracks
     @unique_ids = @tracks.pluck(:unique_id)
     @word = word.presence || @playlist.name
@@ -99,16 +100,17 @@ class PlaylistsController < ApplicationController
     render partial: '/playlists/search_result', locals: { videos: videos, playlist: @playlist, word: word }
   end
 
-  # Youtube検索オートページャー
-  def search_pager(id, word: '', page: 1)
-    unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
-    videos = Track.youtube_search(word, unique_ids, page)
+  # # Youtube検索オートページャー
+  # def search_pager(id, word: '', page: 1)
+  #   unique_ids = @playlist.tracks.mine(current_user).pluck(:unique_id)
+  #   videos = Track.youtube_search(word, unique_ids, page)
 
-    render partial: '/playlists/search_pager', locals: { videos: videos, playlist: @playlist, word: word }
-  end
+  #   render partial: '/playlists/search_pager', locals: { videos: videos, playlist: @playlist, word: word }
+  # end
 
   # プレイリストプレイオール
-  def all(checks)
+  def all(checks: nil)
+    checks.permit!
     tracks = Track.mine(current_user)
     tracks.where!(playlist_id: checks.values) if checks.present?
     @tracks = Track.where(id: tracks.pluck(:id).shuffle.first(100))
@@ -117,23 +119,23 @@ class PlaylistsController < ApplicationController
     @checks = checks
   end
 
-  # フォーク
-  def fork(id)
-    source_playlist = Playlist.includes(:tracks).find_by(id: id)
-    new_playlist = source_playlist.dup
-    new_playlist.user_id     = current_user.id
-    new_playlist.playlist_id = source_playlist.id
-    new_playlist.save!
+  # # フォーク
+  # def fork(id)
+  #   source_playlist = Playlist.includes(:tracks).find_by(id: id)
+  #   new_playlist = source_playlist.dup
+  #   new_playlist.user_id     = current_user.id
+  #   new_playlist.playlist_id = source_playlist.id
+  #   new_playlist.save!
 
-    source_playlist.tracks.each do |track|
-      new_track = track.dup
-      new_track.user_id     = current_user.id
-      new_track.playlist_id = new_playlist.id
-      new_track.save!
-    end
+  #   source_playlist.tracks.each do |track|
+  #     new_track = track.dup
+  #     new_track.user_id     = current_user.id
+  #     new_track.playlist_id = new_playlist.id
+  #     new_track.save!
+  #   end
 
-    redirect_to playlist_path(new_playlist.id) and return
-  end
+  #   redirect_to playlist_path(new_playlist.id) and return
+  # end
 
   private
 

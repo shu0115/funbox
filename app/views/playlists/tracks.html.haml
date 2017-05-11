@@ -1,68 +1,61 @@
-- # 公開用プレイリストページ
+-# - # 公開用プレイリストページ
 
-- title [Settings.app_name, @playlist.name]
-- description @playlist.tracks.first.try(:description)
-- keywords @playlist.tracks.pluck(:title)
-- set_meta_tags og: { title: [Settings.app_name, @playlist.name].join(' | '), description: @playlist.tracks.first.try(:description), url: request.url, image: @playlist.tracks.first.try(:thumbnail_url) }
+-# - title [Settings.app_name, @playlist.name]
+-# - description @playlist.tracks.first.try(:description)
+-# - keywords @playlist.tracks.pluck(:title)
+-# - set_meta_tags og: { title: [Settings.app_name, @playlist.name].join(' | '), description: @playlist.tracks.first.try(:description), url: request.url, image: @playlist.tracks.first.try(:thumbnail_url) }
 
-.container{ style: 'width: 900px'}
-  %h2= link_to @playlist.name, playlist_path(@playlist)
+-# .container{ style: 'width: 900px'}
+-#   %h2= link_to @playlist.name, playlist_path(@playlist)
 
-  %h4
-    Selected by
-    = @playlist.user.try(:name)
+-#   %h4
+-#     Selected by
+-#     = @playlist.user.try(:name)
 
-    - if @playlist.playlist_id.present?
-      = ", From"
-      = link_to @playlist.playlist.name, tracks_playlist_path(@playlist.playlist_id)
+-#     - if @playlist.playlist_id.present?
+-#       = ", From"
+-#       = link_to @playlist.playlist.name, tracks_playlist_path(@playlist.playlist_id)
 
-    = ','
-    = link_to (image_tag 'amazon.png', width: 63, height: 18), "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=カタカナ&url=search-alias%3Daps&field-keywords=#{@playlist.name}&at=#{Settings.amazon_affiliate_id}", target: '_blank'
+-#     = render partial: '/layouts/amazon_link', locals: { playlist: @playlist }
 
-  - # Play All
-  .text-center
-    = render partial: '/common/playall', locals: { tracks: @playlist.tracks, unique_ids: @unique_ids }
-    %br
-    %br
-    %p
-      - if current_user.present?
-        - # シャッフル
-        = link_to 'Shuffle', tracks_playlist_path(@playlist, shuffle: true), class: 'btn btn-primary'
+-#   - # Play All
+-#   .text-center
+-#     = render partial: '/common/playall', locals: { tracks: @playlist.tracks, unique_ids: @unique_ids }
+-#     %br
+-#     %br
+-#     %p
+-#       - if current_user.present?
+-#         - # シャッフル
+-#         = link_to 'Shuffle', tracks_playlist_path(@playlist, shuffle: true), class: 'btn btn-primary'
 
-        - # フォーク
-        - fork_playlist = Playlist.mine(current_user).find_by(playlist_id: @playlist.id)
-        - if fork_playlist.present?
-          - # フォーク済みプレイリストへのリンク
-          = link_to 'Fork', playlist_path(fork_playlist), class: 'btn btn-primary'
-        - else
-          - # フォーク実行
-          = link_to 'Fork', fork_playlist_path(@playlist), method: :post, class: 'btn btn-primary'
-      - else
-        - # ログイン
-        = link_to 'Sign in', "/auth/twitter", class: 'btn btn-primary'
+-#         - # フォーク
+-#         - fork_playlist = Playlist.mine(current_user).find_by(playlist_id: @playlist.id)
+-#         - if fork_playlist.present?
+-#           - # フォーク済みプレイリストへのリンク
+-#           = link_to 'Fork', playlist_path(fork_playlist), class: 'btn btn-primary'
+-#         - else
+-#           - # フォーク実行
+-#           = link_to 'Fork', fork_playlist_path(@playlist), method: :post, class: 'btn btn-primary'
+-#       - else
+-#         - # ログイン
+-#         = link_to 'Sign in', "/auth/twitter", class: 'btn btn-primary'
 
-      - # Facebookシェア
-      = render partial: '/layouts/facebook_share', locals: { playlist: @playlist }
+-#       - # 作成者用プレイリストページへのリンク
+-#       - if @playlist.mine?(current_user)
+-#         = link_to 'Edit', playlist_path(@playlist), class: 'btn btn-primary'
+-#     %br
 
-      - # Twitterシェア
-      = render partial: '/layouts/twitter_share', locals: { playlist: @playlist }
-
-      - # 作成者用プレイリストページへのリンク
-      - if @playlist.mine?(current_user)
-        = link_to 'Edit', playlist_path(@playlist), class: 'btn btn-primary'
-    %br
-
-.container{ style: 'width: 1000px; padding: 0 0 0 0;'}
-  - if @playlist.tracks.present?
-    - # Track List
-    %table
-      - tracks_hash = @playlist.tracks.index_by{ |x| x.unique_id }
-      - @unique_ids.each_slice(4) do |ids|
-        %tr
-        - ids.each do |id|
-          - track = tracks_hash[id]
-          %td{ style: 'padding: 5px;' }
-            %div.gray.track_list_title= track.title
-            = render partial: '/common/video_thumbnail', locals: { track: track }
-%br
-%br
+-# .container{ style: 'width: 1000px; padding: 0 0 0 0;'}
+-#   - if @playlist.tracks.present?
+-#     - # Track List
+-#     %table
+-#       - tracks_hash = @playlist.tracks.index_by{ |x| x.unique_id }
+-#       - @unique_ids.each_slice(4) do |ids|
+-#         %tr
+-#         - ids.each do |id|
+-#           - track = tracks_hash[id]
+-#           %td{ style: 'padding: 5px;' }
+-#             %div.gray.track_list_title= track.title
+-#             = render partial: '/common/video_thumbnail', locals: { track: track }
+-# %br
+-# %br
