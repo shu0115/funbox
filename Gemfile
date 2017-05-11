@@ -79,9 +79,6 @@ gem 'meta-tags'
 gem 'unicode-display_width'
 # gem 'everywhere'
 
-# [Ruby 2.4.0 で json gem v1.8.3 をビルドできない問題 - Qiita](http://qiita.com/shinichinomura/items/41e03d7e4fa56841e654)
-gem 'json', github: 'flori/json', branch: 'v1.8'
-
 # Design Template
 gem 'therubyracer', platforms: :ruby
 gem 'twitter-bootswatch-rails'
