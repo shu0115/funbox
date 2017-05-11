@@ -17,3 +17,6 @@ facebook_app_id: '1443747899201804'
 mail_password: <%= ENV['MAIL_PASSWORD'] %>
 
 secret_key_base: <%= ENV['SECRET_KEY_BASE'] %>
+
+# YouTube
+youtube_api_key: <%= ENV['YOUTUBE_API_KEY'] %>
