@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   #   @users = User.order(created_at: :desc).page(page).per(50)
   # end
 
-  # ユーザのプレイリスト一覧
-  def playlists(user_id)
-    @user      = User.find_by(id: user_id)
-    @playlists = Playlist.where(user_id: user_id).order(created_at: :desc)
-  end
+  # # ユーザのプレイリスト一覧
+  # def playlists(user_id)
+  #   @user      = User.find_by(id: user_id)
+  #   @playlists = Playlist.where(user_id: user_id).order(created_at: :desc)
+  # end
 
   # # プレイリスト内トラック再生
   # def playlist(user_id, id)
@@ -22,13 +22,13 @@ class UsersController < ApplicationController
   #   @unique_ids = @tracks.pluck(:unique_id)
   # end
 
-  # ユーザのトラック全体から100曲ランダム再生
-  def playall(user_id)
-    @user        = User.find_by(id: user_id)
-    @tracks      = Track.where(id: Track.mine(@user).pluck(:id).shuffle.first(100))
-    @unique_ids  = Track.unique_ids(@tracks, shuffle: true)
-    @tracks_hash = @tracks.index_by{ |x| x.unique_id }
-  end
+  # # ユーザのトラック全体から100曲ランダム再生
+  # def playall(user_id)
+  #   @user        = User.find_by(id: user_id)
+  #   @tracks      = Track.where(id: Track.mine(@user).pluck(:id).shuffle.first(100))
+  #   @unique_ids  = Track.unique_ids(@tracks, shuffle: true)
+  #   @tracks_hash = @tracks.index_by{ |x| x.unique_id }
+  # end
 
   # # プレイリストに対するGood
   # def playlist_good_toggle(id)

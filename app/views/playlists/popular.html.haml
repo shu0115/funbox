@@ -1,33 +1,33 @@
-.container{ style: 'width: 700px'}
-  %h2 Popular Playlists
+-# .container{ style: 'width: 700px'}
+-#   %h2 Popular Playlists
 
-  - if @playlists.present?
-    = paginate @playlists, outer_window: 3
+-#   - if @playlists.present?
+-#     = paginate @playlists, outer_window: 3
 
-    %table.table.table-striped.table-hover{ style: 'width: 700px;'}
-      %tr
-        %th No.
-        %th Thumbnail
-        %th User
-        %th Name
-        %th Souce
-        %th Views
-        %th
+-#     %table.table.table-striped.table-hover{ style: 'width: 700px;'}
+-#       %tr
+-#         %th No.
+-#         %th Thumbnail
+-#         %th User
+-#         %th Name
+-#         %th Souce
+-#         %th Views
+-#         %th
 
-      - @playlists.each.with_index(1) do |playlist, index|
-        %tr
-          %td= index + @playlists.offset_value
-          %td= link_to image_tag(playlist.tracks.first.thumbnail_url, height: 50), tracks_playlist_path(playlist)
-          %td{ nowrap: true }
-            = render partial: '/layouts/user_icon', locals: { user: playlist.user, size: "18x18", klass: "margin_minus2" }
-            = '　'
-            = link_to playlist.user.name, user_playlists_path(playlist.user) if playlist.user.present?
-          %td{ nowrap: true, style: 'line-height: 30px;' }
-            = link_to playlist.name, tracks_playlist_path(playlist)
-          %td{ nowrap: true, style: 'line-height: 30px;' }
-            - if playlist.playlist.present?
-              / = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user_id, playlist.playlist_id) rescue nil
-              = link_to playlist.playlist.name, tracks_playlist_path(playlist.playlist_id)
-          %td= playlist.view_count
+-#       - @playlists.each.with_index(1) do |playlist, index|
+-#         %tr
+-#           %td= index + @playlists.offset_value
+-#           %td= link_to image_tag(playlist.tracks.first.thumbnail_url, height: 50), tracks_playlist_path(playlist)
+-#           %td{ nowrap: true }
+-#             = render partial: '/layouts/user_icon', locals: { user: playlist.user, size: "18x18", klass: "margin_minus2" }
+-#             = '　'
+-#             = link_to playlist.user.name, user_playlists_path(playlist.user) if playlist.user.present?
+-#           %td{ nowrap: true, style: 'line-height: 30px;' }
+-#             = link_to playlist.name, tracks_playlist_path(playlist)
+-#           %td{ nowrap: true, style: 'line-height: 30px;' }
+-#             - if playlist.playlist.present?
+-#               / = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user_id, playlist.playlist_id) rescue nil
+-#               = link_to playlist.playlist.name, tracks_playlist_path(playlist.playlist_id)
+-#           %td= playlist.view_count
 
-    = paginate @playlists, outer_window: 3
+-#     = paginate @playlists, outer_window: 3

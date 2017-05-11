@@ -30,14 +30,48 @@
 - # Youtube検索
 .container{ style: 'width: 700px;' }
   - # 検索フォーム
-  = form_tag search_playlist_path(id: @playlist.id, word: @word), method: :get, remote: :true, data: { update_target: 'search_result_area' } do
+  -# = form_tag search_playlist_path(id: @playlist.id, word: @word), method: :get, remote: :true, data: { update_target: 'search_result_area' } do
+  -#   = text_field_tag :word, @word, { class: 'form-control', style: 'width: 550px; float: left' }
+  -#   = submit_tag 'Search', data: { disable_with: 'Search' }, onclick: "$('#search_result_list').empty(); $('#search_result_area_loading').show(); window.history.pushState(null, null, '#{playlist_path(@playlist, search: true)}');", class: 'btn btn-primary left_margin_10'
+
+  = form_tag playlist_path(@playlist.id), method: :get do
     = text_field_tag :word, @word, { class: 'form-control', style: 'width: 550px; float: left' }
-    = submit_tag 'Search', data: { disable_with: 'Search' }, onclick: "$('#search_result_list').empty(); $('#search_result_area_loading').show(); window.history.pushState(null, null, '#{playlist_path(@playlist, search: true)}');", class: 'btn btn-primary left_margin_10'
+    = hidden_field_tag :search, true
+
+    = submit_tag 'Search', data: { disable_with: 'Search' }, class: 'btn btn-primary left_margin_10'
 
 %br
 
-- # Youtube検索結果表示エリア
+-# - # Youtube検索結果表示エリア
+-# .container{ style: 'width: 700px;'}
+-#   - # 検索結果
+-#   #search_result_area
+-#     = render partial: '/playlists/search_result', locals: { videos: @videos, playlist: @playlist, word: @word }
+
 .container{ style: 'width: 700px;'}
-  - # 検索結果
   #search_result_area
-    = render partial: '/playlists/search_result', locals: { videos: @videos, playlist: @playlist, word: @word }
+    #search_result_list
+      - if @videos.present?
+        %h2 Search Result
+
+        %p.text-center= link_to 'Reload', playlist_path(@playlist, search: true), class: 'btn btn-primary'
+
+        %div
+          - @videos.each do |video|
+            %span{ id: "add_video_#{video.id}" }
+              -# = render partial: '/playlists/add_video', locals: { v: v, playlist: playlist, word: word }
+              .add_videos_margin
+                .text-center
+                  %iframe{ width: "427", height: "255", src: "https://www.youtube.com/embed/#{video.id}", frameborder: "0", allowfullscreen: true}
+                %br
+                = "#{Duration.new(video.duration).format('%H:%M:%S')}"
+                = "#{video.title}"
+                = "#{video.published_at&.strftime('%Y/%m/%d %H:%M')}"
+                %br
+                = "#{video.description}"
+                .text-right
+                  = form_tag playlist_track_index_path(playlist_id: @playlist.id, video_id: video.id), remote: true, data: { 'update-target' => "add_video_#{video.id}" } do
+                    = submit_tag 'Add', data: { disable_with: 'Add' }, class: 'btn btn-primary top_margin_10'
+                %br
+
+        %p.text-center= link_to 'Reload', playlist_path(@playlist, search: true), class: 'btn btn-primary'

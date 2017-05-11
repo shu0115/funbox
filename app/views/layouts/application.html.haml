@@ -8,7 +8,7 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
-    = render partial: '/layouts/google_analytics' if Rails.env.production?
+    -# = render partial: '/layouts/google_analytics' if Rails.env.production?
     = display_meta_tags(default_meta_tags)
   %body
     .navbar.navbar-default.navbar-fixed-top
@@ -20,8 +20,8 @@
             %li= render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
             %li{ class: (playlists_active?(params) ? 'active' : '') }= link_to "Playlists", playlists_path
             / %li{ class: (play_all_active?(params) ? 'active' : '') }= link_to "Play all", all_playlists_path
-            %li{ class: (recent_active?(params) ? 'active' : '') }= link_to "Recent", recent_playlists_path
-            %li{ class: (popular_active?(params) ? 'active' : '') }= link_to "Popular", popular_playlists_path
+            -# %li{ class: (recent_active?(params) ? 'active' : '') }= link_to "Recent", recent_playlists_path
+            -# %li{ class: (popular_active?(params) ? 'active' : '') }= link_to "Popular", popular_playlists_path
             / %li= link_to "Goods", goods_path
             / %li= link_to "Users", users_path
             %li= link_to "Sign out", logout_path
@@ -30,7 +30,7 @@
             %li{ class: (popular_active?(params) ? 'active' : '') }= link_to "Popular", popular_playlists_path
             / %li= link_to "Users", users_path
             %li= link_to "Sign in", "/auth/twitter"
-          %li= link_to "Feedback", "https://twitter.com/intent/tweet?text=#{URI.encode('#funbox ' + request.url)}", target: '_blank'
+          -# %li= link_to "Feedback", "https://twitter.com/intent/tweet?text=#{URI.encode('#funbox ' + request.url)}", target: '_blank'
     .page_top_margin
       - if flash[:notice].present? or flash[:alert].present?
         %br

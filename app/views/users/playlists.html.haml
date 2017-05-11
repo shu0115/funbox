@@ -1,23 +1,23 @@
-.container{ style: 'width: 700px'}
-  %h1= "Playlists of #{@user.name}"
+-# .container{ style: 'width: 700px'}
+-#   %h1= "Playlists of #{@user.name}"
 
-  / %br
-  / %p= link_to 'Play all', user_playall_path(@user), class: 'btn btn-primary'
-  / %br
+-#   / %br
+-#   / %p= link_to 'Play all', user_playall_path(@user), class: 'btn btn-primary'
+-#   / %br
 
-  %table.table.table-striped.table-hover{ style: 'width: 700px;'}
-    %tr
-      %th Name
-      %th Souce
-      %th Tracks
+-#   %table.table.table-striped.table-hover{ style: 'width: 700px;'}
+-#     %tr
+-#       %th Name
+-#       %th Souce
+-#       %th Tracks
 
-    - @playlists.each do |playlist|
-      %tr
-        %td{ nowrap: true }
-          / = link_to playlist.name, user_playlist_path(playlist.user, playlist)
-          = link_to playlist.name, tracks_playlist_path(playlist.id)
-        %td{ nowrap: true }
-          - if playlist.playlist.present?
-            / = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user, playlist.playlist)
-            = link_to playlist.playlist.name, tracks_playlist_path(playlist.playlist_id)
-        %td{ style: 'text-align: center;' }= playlist.track_count
+-#     - @playlists.each do |playlist|
+-#       %tr
+-#         %td{ nowrap: true }
+-#           / = link_to playlist.name, user_playlist_path(playlist.user, playlist)
+-#           = link_to playlist.name, tracks_playlist_path(playlist.id)
+-#         %td{ nowrap: true }
+-#           - if playlist.playlist.present?
+-#             / = link_to playlist.playlist.name, user_playlist_path(playlist.playlist.user, playlist.playlist)
+-#             = link_to playlist.playlist.name, tracks_playlist_path(playlist.playlist_id)
+-#         %td{ style: 'text-align: center;' }= playlist.track_count
