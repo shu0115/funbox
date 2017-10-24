@@ -47,7 +47,7 @@
             %td
               = link_to 'Edit', edit_playlist_path(playlist), class: 'btn btn-primary btn-sm'
               = link_to 'Delete', playlist, method: :delete, data: { confirm: "「#{playlist.name}」 is deleted. Are you sure?" }, class: 'btn btn-danger btn-sm'
-    = submit_tag 'Check Play', class: 'btn btn-primary'
+      = submit_tag 'Check Play', class: 'btn btn-primary'
 
     / = paginate @playlists, outer_window: 3
 %br
