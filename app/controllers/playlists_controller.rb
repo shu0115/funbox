@@ -5,30 +5,7 @@ class PlaylistsController < ApplicationController
   before_action :redirect_public, only: [:show]
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :search, :search_pager]
 
-  # # ----- パブリック：全ユーザ公開 ----- #
-  # # 新着順
-  # def recent(page: 1)
-  #   @playlists = Playlist.active.order(created_at: :desc).page(page).per(Settings.per_page)
-  # end
-
-  # # 人気順
-  # def popular(page: 1)
-  #   @playlists = Playlist.active.order(view_count: :desc, created_at: :desc).page(page).per(Settings.per_page)
-  # end
-
-  # # 公開用プレイリスト再生
-  # def tracks(id, shuffle: false)
-  #   session[:request_url] = tracks_playlist_url(id) if current_user.blank?
-
-  #   @playlist   = Playlist.includes(:tracks).order("tracks.created_at ASC").find_by(id: id)
-  #   # @unique_ids = @playlist.tracks.pluck(:unique_id)
-  #   @unique_ids = Track.unique_ids(@playlist.tracks, shuffle: shuffle)
-
-  #   # ビューカウント
-  #   ViewCount.add_daily_count(playlist: @playlist, user: current_user)
-  # end
-
-  # ----- プライベート：自分のもののみ ----- #
+  ## プライベート：自分のプレイリストのみ
   def index(search: {})
     @playlists = Playlist.where(user_id: current_user.id).order(created_at: :desc)
 
@@ -118,24 +95,6 @@ class PlaylistsController < ApplicationController
     @tracks_hash  = @tracks.index_by{ |x| x.unique_id }
     @checks = checks
   end
-
-  # # フォーク
-  # def fork(id)
-  #   source_playlist = Playlist.includes(:tracks).find_by(id: id)
-  #   new_playlist = source_playlist.dup
-  #   new_playlist.user_id     = current_user.id
-  #   new_playlist.playlist_id = source_playlist.id
-  #   new_playlist.save!
-
-  #   source_playlist.tracks.each do |track|
-  #     new_track = track.dup
-  #     new_track.user_id     = current_user.id
-  #     new_track.playlist_id = new_playlist.id
-  #     new_track.save!
-  #   end
-
-  #   redirect_to playlist_path(new_playlist.id) and return
-  # end
 
   private
 

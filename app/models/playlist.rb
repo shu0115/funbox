@@ -2,7 +2,6 @@ class Playlist < ActiveRecord::Base
   belongs_to :user
   belongs_to :playlist, optional: true
   has_many   :tracks, dependent: :destroy
-  has_many   :goods
 
   scope :mine,   -> (user) { where( playlists: { user_id: user.id } ) }
   scope :active, -> { where('playlists.track_count > 0') }
