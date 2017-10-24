@@ -1,4 +1,4 @@
-class CreateViewCounts < ActiveRecord::Migration
+class CreateViewCounts < ActiveRecord::Migration[4.2]
   def change
     create_table :view_counts do |t|
       t.references :user, index: true

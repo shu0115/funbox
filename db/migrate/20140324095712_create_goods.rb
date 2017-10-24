@@ -1,4 +1,4 @@
-class CreateGoods < ActiveRecord::Migration
+class CreateGoods < ActiveRecord::Migration[4.2]
   def change
     create_table :goods do |t|
       t.references :user, index: true

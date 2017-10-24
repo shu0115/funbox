@@ -3,15 +3,16 @@ class SessionsController < ApplicationController
 
   # ログイン
   def callback
-    auth = request.env["omniauth.auth"]
-    authentication = Authentication.find_by(provider: auth["provider"], uid: auth["uid"]) || Authentication.create_with_omniauth(auth)
-    authentication.auth_update(auth)
+    ActiveRecord::Base.transaction do
+      auth = request.env['omniauth.auth']
+      authentication = Authentication.find_by(provider: auth['provider'], uid: auth['uid']) || Authentication.create_with_omniauth!(auth)
+      authentication.auth_update(auth)
 
-    # ユーザ取得or作成
-    user = User.find_by(id: authentication.user_id) || User.create_with_auth(authentication)
+      # ユーザ取得or作成
+      user = User.find_by(id: authentication.user_id) || User.create_with_auth!(authentication)
 
-    session[:user_id] = user.id
-    # flash[:notice]    = "ログインしました。"
+      session[:user_id] = user.id
+    end
 
     # 保管URLへリダイレクト
     unless session[:request_url].blank?
@@ -28,13 +29,13 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
 
-    # redirect_to :root, notice: "ログアウトしました。" and return
     redirect_to :root and return
   end
 
   # ログインエラー
   def failure
     flash[:alert] = 'Auth Failure'
+
     redirect_to :root and return
   end
 end

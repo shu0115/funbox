@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   private
 
   # ユーザ作成
-  def self.create_with_auth(authentication)
+  def self.create_with_auth!(authentication)
     # ユーザ作成
     user = User.new
     user.name                = (authentication.nickname.presence || authentication.name)
